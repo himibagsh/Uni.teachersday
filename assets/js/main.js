@@ -556,3 +556,120 @@ var CONFIG = {
 
   for (var j = 0; j < items.length; j++) io.observe(items[j]);
 }());
+
+/* ===================================================================
+   Багшийн зураг дээр дарахад түүнд бичсэн захидлууд нээгдэнэ.
+   Өгөгдөл assets/data/letters.js дотор.
+   =================================================================== */
+
+(function () {
+
+  var dialog = document.getElementById('letters');
+  var buttons = [].slice.call(document.querySelectorAll('.person__btn'));
+  if (!dialog || !buttons.length) return;
+
+  var DATA = (window.LETTERS && typeof window.LETTERS === 'object') ? window.LETTERS : {};
+  var BOX = (DATA.letters && typeof DATA.letters === 'object') ? DATA.letters : {};
+
+  var photo = document.getElementById('letters-photo');
+  var nameEl = document.getElementById('letters-name');
+  var roleEl = document.getElementById('letters-role');
+  var body = document.getElementById('letters-body');
+  var opener = null;
+
+  /* Захидал үлдээх урилга: маягтын хаяг байвал л харуулна */
+  var cta = document.getElementById('roster-cta');
+  var ctaLink = document.getElementById('letter-form');
+  if (cta && ctaLink && DATA.form) {
+    ctaLink.href = DATA.form;
+    cta.hidden = false;
+  }
+
+  /* Хэдэн захидалтайг нь зураган дээр нь тэмдэглэнэ */
+  buttons.forEach(function (b) {
+    var list = BOX[b.getAttribute('data-slug')];
+    var n = (list && list.length) || 0;
+    b.setAttribute('data-count', String(n));
+    if (!n) return;
+    var cell = b.querySelector('.person__cell');
+    if (!cell) return;
+    var badge = document.createElement('span');
+    badge.className = 'person__badge';
+    badge.textContent = String(n);
+    badge.setAttribute('aria-hidden', 'true');
+    cell.appendChild(badge);
+    b.setAttribute('aria-label', b.getAttribute('data-name') + ' · ' + n + ' захидал');
+  });
+
+  function text(tag, cls, value) {
+    var el = document.createElement(tag);
+    if (cls) el.className = cls;
+    if (value) el.textContent = value;
+    return el;
+  }
+
+  function fill(btn) {
+    var slug = btn.getAttribute('data-slug');
+    var list = BOX[slug] || [];
+
+    photo.src = btn.getAttribute('data-photo') || '';
+    photo.alt = btn.getAttribute('data-name') || '';
+    nameEl.textContent = btn.getAttribute('data-name') || '';
+    roleEl.textContent = btn.getAttribute('data-role') || '';
+
+    body.textContent = '';
+
+    if (!list.length) {
+      var empty = text('div', 'letters__empty');
+      empty.appendChild(text('p', 'letters__empty-line',
+        'Одоогоор захидал алга байна.'));
+      if (DATA.form) {
+        var a = document.createElement('a');
+        a.className = 'letters__write';
+        a.href = DATA.form;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = 'Хамгийн түрүүнд бичих';
+        empty.appendChild(a);
+      }
+      body.appendChild(empty);
+      return;
+    }
+
+    var count = text('p', 'letters__count', list.length + ' захидал');
+    body.appendChild(count);
+
+    list.forEach(function (item) {
+      var fig = document.createElement('figure');
+      fig.className = 'letter';
+      fig.appendChild(text('blockquote', 'letter__text', item.text || ''));
+      if (item.from || item.note) {
+        var cap = text('figcaption', 'letter__from');
+        cap.textContent = '— ' + [item.from, item.note].filter(Boolean).join(' · ');
+        fig.appendChild(cap);
+      }
+      body.appendChild(fig);
+    });
+  }
+
+  function open(btn) {
+    opener = btn;
+    fill(btn);
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    body.scrollTop = 0;
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { open(b); });
+  });
+
+  /* Гадна талд дарахад хаана */
+  dialog.addEventListener('click', function (e) {
+    if (e.target === dialog) dialog.close();
+  });
+
+  dialog.addEventListener('close', function () {
+    if (opener) { opener.focus(); opener = null; }
+  });
+}());

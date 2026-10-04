@@ -14,7 +14,8 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies.
 ```
 index.html
 assets/css/style.css
-assets/js/main.js        <- the only file you edit
+assets/js/main.js        <- the video config lives at the top
+assets/data/letters.js   <- the letters
 assets/favicon.svg
 assets/img/bagsh/        <- the 23 portraits, ink duotone, 4:5
 assets/video/            <- a self-hosted film goes here
@@ -197,6 +198,65 @@ real drawings with no code change at all.
 `print/khamt-olon.png` is all 23 laid out as one sheet, same cells and same
 tones as the page. It is 1410 × 1636, which prints cleanly up to about A4, and
 it works as an end card for the film.
+
+## Letters to the teachers
+
+Every portrait opens. Clicking one shows the letters students wrote to that
+person, and a small copper number on the portrait says how many are waiting. A
+teacher with none yet gets an invitation rather than a dead end.
+
+### Where letters are stored
+
+GitHub Pages serves files and nothing else — there is no server here to receive
+a form, so the page cannot take submissions directly. Letters live in
+`assets/data/letters.js`, which is plain JavaScript you can edit by hand:
+
+```js
+window.LETTERS = {
+  form: 'https://forms.gle/XXXX',
+  letters: {
+    bolormaa: [
+      { text: 'Таны лекц дээр л би химийг анх ойлгосон.',
+        from: 'Б. Ану', note: '3-р курс' }
+    ]
+  }
+};
+```
+
+The key is the slug from the portrait's filename: `01-bolormaa.jpg` is
+`bolormaa`. `from` and `note` are both optional, so an unsigned letter still
+works.
+
+### Collecting them
+
+Make a Google Form with four questions — **Багш** (a dropdown of the 23),
+**Захидал**, **Таны нэр** (optional) and **Курс** (optional). Put its address in
+`form` above and a "Захидал бичих" button appears under the roster and inside
+any empty profile.
+
+When responses come in, download the CSV and run:
+
+```sh
+python3 scripts/letters.py hariult.csv --form https://forms.gle/XXXX
+```
+
+It matches names loosely, so "О.Болормаа", "Болормаа" and "Болормаа багш" all
+land on the same person, and it prints any row whose teacher it could not
+identify rather than dropping it quietly. Then read what it wrote, and commit.
+
+That read-before-commit step is the point, not an inconvenience. Anyone with the
+form link can type anything into it, and these letters are going in front of the
+person they name. Nothing reaches the page until one of you has seen it.
+
+### Two things to settle before you start collecting
+
+**The site is public.** A letter published here can be read by anyone who finds
+the URL, not only by the teacher it was written for. Say so on the form. If you
+would rather they stayed private, print them inside the cards instead and leave
+this off — the portraits still open, they just show the person.
+
+**Names are optional on purpose.** Some students write more honestly unsigned,
+and the layout handles a letter with no name.
 
 ## The puzzle
 
