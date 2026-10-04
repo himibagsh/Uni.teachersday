@@ -26,17 +26,7 @@ var CONFIG = {
     { label: 'Зураг авалт', state: 'done'    },
     { label: 'Эвлүүлэг',    state: 'active'  },
     { label: 'Дуу, өнгө',   state: 'pending' }
-  ],
-
-  /* Багш нарын жагсаалт. Нэг ч багш нэмэхэд «Багш нартаа» хэсэг
-     өөрөө гарч ирнэ. Жишээ:
-
-       { name: 'Б. Отгонбаатар', role: 'Профессор', symbol: 'От',
-         photo: 'assets/img/bagsh/otgonbaatar.jpg' }
-
-     symbol нь элементийн тэмдэг шиг 1-2 үсэг. photo байхгүй бол
-     symbol нь нүүрний оронд харагдана. */
-  teachers: []
+  ]
 };
 
 (function () {
@@ -179,70 +169,11 @@ var CONFIG = {
     });
   }
 
-  /* ---- багш нар ---- */
-
-  function renderTeachers() {
-    var section = document.getElementById('bagsh');
-    var list = document.getElementById('teachers');
-    if (!section || !list) return;
-
-    var people = CONFIG.teachers || [];
-    if (!people.length) return;
-
-    people.forEach(function (person, index) {
-      var li = document.createElement('li');
-      li.className = 'teacher';
-
-      var tile = document.createElement('div');
-      tile.className = 'teacher__tile';
-
-      if (person.photo) {
-        var img = document.createElement('img');
-        img.className = 'teacher__photo';
-        img.src = person.photo;
-        img.alt = person.name || '';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        tile.appendChild(img);
-      } else {
-        var sym = document.createElement('span');
-        sym.className = 'teacher__sym';
-        sym.textContent = person.symbol || (person.name || '?').trim().charAt(0);
-        tile.appendChild(sym);
-      }
-
-      var z = document.createElement('span');
-      z.className = 'teacher__z';
-      z.textContent = String(index + 1);
-      tile.appendChild(z);
-
-      li.appendChild(tile);
-
-      if (person.name) {
-        var name = document.createElement('p');
-        name.className = 'teacher__name';
-        name.textContent = person.name;
-        li.appendChild(name);
-      }
-
-      if (person.role) {
-        var role = document.createElement('p');
-        role.className = 'teacher__role';
-        role.textContent = person.role;
-        li.appendChild(role);
-      }
-
-      list.appendChild(li);
-    });
-
-    section.hidden = false;
-  }
 
   /* ---- эхлэл ---- */
 
   drawStages();
   if (!mountPlayer()) startCountdown();
   wireReveal();
-  renderTeachers();
 
 }());

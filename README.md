@@ -16,10 +16,11 @@ index.html
 assets/css/style.css
 assets/js/main.js        <- the only file you edit
 assets/favicon.svg
-assets/img/bagsh/        <- teacher portraits go here
+assets/img/bagsh/        <- the 23 portraits, ink duotone, 4:5
 assets/video/            <- a self-hosted film goes here
 print/qr.svg             <- the QR code for the card
 print/qr.png
+print/khamt-olon.png     <- the department as one sheet
 ```
 
 ## Looking at it
@@ -95,24 +96,49 @@ stages: [
 `videoReady` is still `false`, the countdown stops by itself and the slate
 reads "Бичлэг удахгүй энд тавигдана".
 
-## Adding the teachers
+## The roster
 
-The "Багш нартаа" section is hidden until you fill in the `teachers` list in
-`assets/js/main.js`:
+All 23 of the department are in `index.html` under `#bagsh`, grouped Профессор
+/ Дэд профессор / Багш / Тэнхимийн хамт олон. One person is one block:
 
-```js
-teachers: [
-  { name: 'Б. Отгонбаатар', role: 'Профессор', symbol: 'От',
-    photo: 'assets/img/bagsh/otgonbaatar.jpg' },
-  { name: 'Д. Сарантуяа',   role: 'Дэд профессор', symbol: 'Са',
-    photo: 'assets/img/bagsh/sarantuya.jpg' }
-]
+```html
+<li class="person">
+  <div class="person__cell">
+    <img class="person__photo" src="assets/img/bagsh/01-bolormaa.jpg"
+         alt="О.Болормаа" width="560" height="700" loading="lazy" decoding="async">
+    <span class="person__n">01</span>
+  </div>
+  <p class="person__name">О.Болормаа</p>
+  <p class="person__role">Тэнхимийн эрхлэгч</p>
+</li>
 ```
 
-Each teacher is drawn as a periodic-table cell. `photo` fills the cell; drop
-the files in `assets/img/bagsh/` as square-ish JPEGs around 600 × 700, since
-they are cropped to fit. Without a `photo`, the `symbol` shows instead, so the
-section works before the portraits are ready.
+`person__role` is only there when the role differs from the group heading, so
+the heading is not repeated under every face.
+
+### The portraits
+
+The photographs came from the department roster sheet. Nineteen were cut out of
+that sheet and four were sent as separate files, so the sources ranged from
+2417 × 3223 down to 105 × 131, with coloured rings, banners and grey passport
+backgrounds all mixed together. They are all now cropped to 4:5 and toned to a
+single ink ramp — `#1b2240` in the shadows, `#fbfbfd` in the highlights — which
+is what makes 23 photographs of wildly different origin read as one set, and
+what lets them sit next to the hand-drawn cards without fighting them.
+
+`scripts/portraits.py` rebuilds the whole set from the sources. If you get a
+better photograph of someone, drop it in and re-run it, or just replace the one
+JPEG — nothing else depends on it. `TUNE` in that script holds the per-person
+zoom for the few whose face sat small in a busy frame.
+
+For a colour set instead of the ink one, delete the `duotone(...)` call in the
+script and re-run.
+
+### The group sheet
+
+`print/khamt-olon.png` is all 23 laid out as one sheet, same cells and same
+tones as the page. It is 1410 × 1636, which prints cleanly up to about A4, and
+it works as an end card for the film.
 
 ## The puzzle
 
@@ -136,13 +162,21 @@ clue changes on the card, change the matching cell here so the two agree.
 
 The page continues the printed card rather than restating it: the same
 letterspaced institution line, the same copper rule under an italic salutation,
-and the periodic-table cell as the one repeating object — atomic number in the
-corner, symbol in the middle, Mongolian letter underneath.
+and the periodic-table cell as the one repeating object. The cell holds the
+hidden word in the puzzle and it holds a face in the roster, so one shape
+carries the whole page.
+
+Behind the opening sits the full periodic table, all 118 cells in hairlines,
+with the ten the card's clues name picked out in copper. It is generated, not
+drawn by hand, and it is the reason the first screen is not empty while the
+film is still missing.
 
 Colour is six custom properties at the top of `style.css`, sampled from the
 card artwork: paper, panel, ink `#1b2240`, soft ink, rule, copper `#b35228`.
 Light and dark are both defined there and follow the reader's phone setting,
 which matters because most people arrive here from a camera in a corridor.
 
-Type is Playfair Display for the serif voice, Golos Text for running text and
-IBM Plex Mono for the atomic numbers and labels. All three carry Cyrillic.
+Type is Playfair Display for the serif voice, Golos Text for running text, IBM
+Plex Mono for the atomic numbers and labels, and Caveat for the two signatures,
+which answer the handwritten names on the cards. All four carry Cyrillic — most
+display faces do not, so check before swapping one out.
