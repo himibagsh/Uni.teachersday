@@ -203,6 +203,28 @@ with the ten the card's clues name picked out in copper. It is generated, not
 drawn by hand, and it is the reason the first screen is not empty while the
 film is still missing.
 
+## Motion
+
+Everything that moves is drawn from the subject rather than applied to it.
+
+- **The background** is a canvas of benzene rings and free atoms. The rings
+  drift and turn, carrying their alternating double bonds; loose atoms form
+  bonds with whichever neighbour comes close enough, and scatter away from a
+  finger or a cursor. Ring and atom counts scale with the viewport, the loop
+  stops when the tab is hidden, and device pixel ratio is capped at 2.
+- **The periodic table** is two stacked copies. The lower one is dim; the upper
+  one is brighter and masked to a circle that follows the pointer, so the table
+  lights up under your finger. With no pointer the circle drifts on its own, and
+  the ten cells the card names pulse on a stagger.
+- **The puzzle cells** flip one at a time now, not only all at once. The
+  greeting appears when the tenth turns, however you got there.
+- **The roster** deals its portraits out in sequence as each group scrolls in.
+- **The countdown** ticks each digit as it changes.
+
+Every one of these is disabled by `prefers-reduced-motion: reduce`, which also
+leaves the big word unsplit and every section visible at rest. The reveals live
+behind a `.js` class set in the head, so with scripting off nothing is hidden.
+
 Colour is six custom properties at the top of `style.css`, sampled from the
 card artwork: paper, panel, ink `#1b2240`, soft ink, rule, copper `#b35228`.
 Light and dark are both defined there and follow the reader's phone setting,

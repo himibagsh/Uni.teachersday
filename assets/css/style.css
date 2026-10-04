@@ -18,9 +18,12 @@
   --copper:   #b35228;
 
   /* Үелэх хүснэгтийн усан тэмдэг */
-  --pt-line:     #dfe2ec;
-  --pt-hot:      #d59a7a;
-  --pt-hot-fill: rgba(179, 82, 40, 0.05);
+  --pt-line:     #e3e6ef;
+  --pt-hot:      #e0b49c;
+  --pt-hot-fill: rgba(179, 82, 40, 0.04);
+  --pt-line-lit: #b9c0d4;
+  --pt-hot-lit:  #b35228;
+  --wash:        rgba(179, 82, 40, 0.05);
 
   /* Үсгийн фонт */
   --font-display: 'Playfair Display', 'PT Serif', Georgia, 'Times New Roman', serif;
@@ -47,9 +50,12 @@
     --ink-soft: #9ba0b8;
     --rule:     #2c3148;
     --copper:   #e08351;
-    --pt-line:     #20253a;
-    --pt-hot:      #6d4733;
-    --pt-hot-fill: rgba(224, 131, 81, 0.07);
+    --pt-line:     #1e2335;
+    --pt-hot:      #5a3b2b;
+    --pt-hot-fill: rgba(224, 131, 81, 0.05);
+    --pt-line-lit: #3b4461;
+    --pt-hot-lit:  #e08351;
+    --wash:        rgba(224, 131, 81, 0.07);
     color-scheme: dark;
   }
 }
@@ -61,17 +67,52 @@
   --ink-soft: #9ba0b8;
   --rule:     #2c3148;
   --copper:   #e08351;
-  --pt-line:     #20253a;
-  --pt-hot:      #6d4733;
-  --pt-hot-fill: rgba(224, 131, 81, 0.07);
+  --pt-line:     #1e2335;
+  --pt-hot:      #5a3b2b;
+  --pt-hot-fill: rgba(224, 131, 81, 0.05);
+  --pt-line-lit: #3b4461;
+  --pt-hot-lit:  #e08351;
+  --wash:        rgba(224, 131, 81, 0.07);
   color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Дэвсгэр зураас хуудасны ард, агуулга дээр нь */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+main, .footer { position: relative; z-index: 1; }
+
+.progress {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--copper);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
 body {
   margin: 0;
   background: var(--paper);
+  background:
+    radial-gradient(130% 68% at 50% -8%, var(--wash) 0%, transparent 62%),
+    var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--step-0);
@@ -192,21 +233,52 @@ a { color: inherit; }
 .hero__table {
   position: absolute;
   inset: 0;
-  z-index: -1;
-  display: grid;
-  place-items: center;
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.7;
+  --mx: 50%;
+  --my: 42%;
+  --shift: 0px;
   -webkit-mask-image: radial-gradient(96% 78% at 50% 46%, #000 8%, transparent 66%);
   mask-image: radial-gradient(96% 78% at 50% 46%, #000 8%, transparent 66%);
 }
 
-.hero__table svg {
-  width: min(128%, 1180px);
-  height: auto;
+.pt {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform: translate3d(0, calc(var(--shift) * -1), 0);
+}
+
+.pt svg { width: min(128%, 1180px); height: auto; }
+
+.pt rect { fill: none; stroke: var(--pt-line); stroke-width: 0.7; }
+.pt rect.pt-hot { fill: var(--pt-hot-fill); stroke: var(--pt-hot); stroke-width: 1.1; }
+
+/* Гэрэлтэй давхарга зөвхөн хуруу, хулганы орчимд нээгдэнэ */
+.pt--lit {
+  --pt-line: var(--pt-line-lit);
+  --pt-hot: var(--pt-hot-lit);
+  -webkit-mask-image: radial-gradient(circle 190px at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.5) 45%, transparent 72%);
+  mask-image: radial-gradient(circle 190px at var(--mx) var(--my), #000 0%, rgba(0,0,0,0.5) 45%, transparent 72%);
+}
+
+/* Картын сэжүүрт нэрлэгдсэн 10 элемент намуухан анивчина */
+.pt--lit rect.pt-hot {
+  animation: ptpulse 4.6s ease-in-out infinite;
+  animation-delay: calc(var(--p, 0) * 0.42s);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes ptpulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
 }
 
 .hero__content {
+  position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
   text-align: center;
@@ -228,6 +300,17 @@ a { color: inherit; }
   line-height: 0.98;
 }
 
+.hero__to span {
+  display: inline-block;
+  animation: letterIn 0.72s cubic-bezier(0.2, 0.74, 0.21, 1) backwards;
+  animation-delay: calc(0.28s + var(--l, 0) * 0.055s);
+}
+
+@keyframes letterIn {
+  from { opacity: 0; transform: translateY(0.36em) rotate(3deg); }
+  to   { opacity: 1; transform: none; }
+}
+
 .hero .prose { text-align: center; text-wrap: balance; }
 
 .hero__meta {
@@ -236,6 +319,52 @@ a { color: inherit; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
+}
+
+/* ---------- гүйх хөвөө ---------- */
+
+.marquee {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel);
+  margin-block: clamp(26px, 5vw, 46px);
+  padding-block: 11px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: slide 42s linear infinite;
+}
+
+.marquee__set {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.marquee__set i {
+  display: inline-block;
+  width: 7px;
+  height: 8px;
+  margin-inline: 1.6em;
+  background: var(--copper);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+@keyframes slide {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ---------- бүлэг ---------- */
@@ -440,7 +569,27 @@ a { color: inherit; }
   border: 1px solid var(--rule);
   background: var(--panel);
   overflow: hidden;
+  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
 }
+
+.person:hover .person__cell,
+.person:focus-within .person__cell {
+  border-color: var(--copper);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px -14px var(--ink);
+}
+
+.person__photo { transition: transform 0.4s ease; }
+.person:hover .person__photo { transform: scale(1.045); }
+
+.person:hover .person__n,
+.person:focus-within .person__n {
+  background: var(--copper);
+  color: var(--paper);
+  border-color: var(--copper);
+}
+
+.person__n { transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease; }
 
 .person__photo {
   width: 100%;
@@ -520,10 +669,26 @@ a { color: inherit; }
   .tiles[data-cols="4"] { max-width: 100%; }
 }
 
-.tile { perspective: 700px; aspect-ratio: 1 / 1.22; min-width: 0; }
+.tile {
+  perspective: 700px;
+  aspect-ratio: 1 / 1.22;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tile:focus-visible { outline-offset: 4px; }
 
 .tile__inner {
   position: relative;
+  display: block;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
@@ -531,11 +696,18 @@ a { color: inherit; }
   transition-delay: calc(var(--i, 0) * 65ms);
 }
 
-.tiles.is-open .tile__inner { transform: rotateY(180deg); }
+.tile.is-flipped .tile__inner { transform: rotateY(180deg); }
+
+.tile:not(.is-flipped):hover .tile__face--q,
+.tile:not(.is-flipped):focus-visible .tile__face--q {
+  border-color: var(--copper);
+  color: var(--copper);
+}
 
 .tile__face {
   position: absolute;
   inset: 0;
+  transition: border-color 0.18s ease, color 0.18s ease;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border: 1px solid var(--rule);
@@ -546,6 +718,7 @@ a { color: inherit; }
 }
 
 .tile__face--q {
+  place-content: center;
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 4.5vw, 1.7rem);
   color: var(--ink-soft);
@@ -654,6 +827,38 @@ a { color: inherit; }
   line-height: 1.9;
 }
 
+/* ---------- гүйлгэхэд гарч ирэх ---------- */
+
+/* JS ажиллаагүй бол бүх зүйл шууд харагдана: нуулт нь зөвхөн .js дээр */
+.js [data-reveal]:not(.roster__group) {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.74, 0.21, 1);
+}
+
+.js [data-reveal]:not(.roster__group).is-in { opacity: 1; transform: none; }
+
+/* Нэрсийн бүлэгт нүд бүр ээлжлэн гарч ирнэ */
+.js .roster__group .person { opacity: 0; }
+
+.js .roster__group.is-in .person {
+  animation: personIn 0.58s cubic-bezier(0.2, 0.74, 0.21, 1) forwards;
+  animation-delay: calc(var(--k, 0) * 48ms);
+}
+
+@keyframes personIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Тоолуурын цифр солигдоход товч цохилт */
+.countdown dd.tick { animation: tick 0.42s ease; }
+
+@keyframes tick {
+  0%   { transform: translateY(-0.16em); opacity: 0.35; }
+  100% { transform: none; opacity: 1; }
+}
+
 /* ---------- ачаалах дараалал ---------- */
 
 .rise {
@@ -682,5 +887,18 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rise, .draw { animation: none; }
-  .tile__inner, .reveal-btn { transition: none; }
+  .pt--lit rect.pt-hot { animation: none; opacity: 0.8; }
+  .tile__inner,
+  .reveal-btn,
+  .tile__face,
+  .person__cell,
+  .person__photo,
+  .person__n { transition: none; }
+  .js [data-reveal]:not(.roster__group) { opacity: 1; transform: none; transition: none; }
+  .js .roster__group .person { opacity: 1; animation: none; }
+  .hero__to span { animation: none; }
+  .marquee__track { animation: none; }
+  .countdown dd.tick { animation: none; }
+  .person:hover .person__cell { transform: none; }
+  .person:hover .person__photo { transform: none; }
 }

@@ -16,8 +16,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Golos+Text:wght@400..600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.className += " js";</script>
 </head>
 <body>
+
+<!-- Хөдөлгөөнт дэвсгэр: бензолын цагираг, чөлөөт атомууд, түр үүсэх холбоо -->
+<canvas class="bg-canvas" id="bg" aria-hidden="true"></canvas>
+<div class="progress" id="progress" aria-hidden="true"><span></span></div>
 
 <header class="topbar">
   <div class="shell topbar__inner">
@@ -29,13 +34,18 @@
 <main>
 
   <!-- ===================== картны нүүр ===================== -->
-  <section class="hero">
-    <div class="hero__table" aria-hidden="true"><svg viewBox="0 0 261.2 147.6" width="261" height="148" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><rect x="0.0" y="0.0" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="248.2" y="0.0" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="0.0" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="14.6" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="14.6" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="189.8" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="248.2" y="14.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="0.0" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="14.6" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="29.2" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="204.4" y="29.2" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="219.0" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="248.2" y="29.2" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="0.0" y="43.8" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="14.6" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="29.2" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="43.8" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="189.8" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="43.8" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="219.0" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="43.8" width="13" height="13" rx="1" fill="var(--pt-hot-fill)" stroke="var(--pt-hot)" stroke-width="1.1"/><rect x="248.2" y="43.8" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="0.0" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="14.6" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="29.2" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="248.2" y="58.4" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="0.0" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="14.6" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="29.2" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="120.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="248.2" y="73.0" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="0.0" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="14.6" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="29.2" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="134.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="43.8" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="58.4" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="73.0" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="87.6" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="102.2" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="116.8" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="131.4" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="146.0" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="160.6" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="175.2" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="189.8" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="204.4" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="219.0" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="233.6" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/><rect x="248.2" y="87.6" width="13" height="13" rx="1" fill="none" stroke="var(--pt-line)" stroke-width="0.7"/></svg></div>
+  <section class="hero" id="hero">
+    <!-- Хоёр давхар хүснэгт: доод нь бүдэг, дээд нь гэрэлтэй бөгөөд
+         хуруу эсвэл хулганы байрлалаар нээгдэнэ. -->
+    <div class="hero__table" aria-hidden="true">
+      <div class="pt pt--dim"><svg viewBox="0 0 261.2 147.6" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><rect class="pt-hot" style="--p:0" x="0.0" y="0.0" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:1" x="248.2" y="0.0" width="13" height="13" rx="1"/><rect x="0.0" y="14.6" width="13" height="13" rx="1"/><rect x="14.6" y="14.6" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:2" x="175.2" y="14.6" width="13" height="13" rx="1"/><rect x="189.8" y="14.6" width="13" height="13" rx="1"/><rect x="204.4" y="14.6" width="13" height="13" rx="1"/><rect x="219.0" y="14.6" width="13" height="13" rx="1"/><rect x="233.6" y="14.6" width="13" height="13" rx="1"/><rect x="248.2" y="14.6" width="13" height="13" rx="1"/><rect x="0.0" y="29.2" width="13" height="13" rx="1"/><rect x="14.6" y="29.2" width="13" height="13" rx="1"/><rect x="175.2" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:3" x="189.8" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:4" x="204.4" y="29.2" width="13" height="13" rx="1"/><rect x="219.0" y="29.2" width="13" height="13" rx="1"/><rect x="233.6" y="29.2" width="13" height="13" rx="1"/><rect x="248.2" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:5" x="0.0" y="43.8" width="13" height="13" rx="1"/><rect x="14.6" y="43.8" width="13" height="13" rx="1"/><rect x="29.2" y="43.8" width="13" height="13" rx="1"/><rect x="43.8" y="43.8" width="13" height="13" rx="1"/><rect x="58.4" y="43.8" width="13" height="13" rx="1"/><rect x="73.0" y="43.8" width="13" height="13" rx="1"/><rect x="87.6" y="43.8" width="13" height="13" rx="1"/><rect x="102.2" y="43.8" width="13" height="13" rx="1"/><rect x="116.8" y="43.8" width="13" height="13" rx="1"/><rect x="131.4" y="43.8" width="13" height="13" rx="1"/><rect x="146.0" y="43.8" width="13" height="13" rx="1"/><rect x="160.6" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:6" x="175.2" y="43.8" width="13" height="13" rx="1"/><rect x="189.8" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:7" x="204.4" y="43.8" width="13" height="13" rx="1"/><rect x="219.0" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:8" x="233.6" y="43.8" width="13" height="13" rx="1"/><rect x="248.2" y="43.8" width="13" height="13" rx="1"/><rect x="0.0" y="58.4" width="13" height="13" rx="1"/><rect x="14.6" y="58.4" width="13" height="13" rx="1"/><rect x="29.2" y="58.4" width="13" height="13" rx="1"/><rect x="43.8" y="58.4" width="13" height="13" rx="1"/><rect x="58.4" y="58.4" width="13" height="13" rx="1"/><rect x="73.0" y="58.4" width="13" height="13" rx="1"/><rect x="87.6" y="58.4" width="13" height="13" rx="1"/><rect x="102.2" y="58.4" width="13" height="13" rx="1"/><rect x="116.8" y="58.4" width="13" height="13" rx="1"/><rect x="131.4" y="58.4" width="13" height="13" rx="1"/><rect x="146.0" y="58.4" width="13" height="13" rx="1"/><rect x="160.6" y="58.4" width="13" height="13" rx="1"/><rect x="175.2" y="58.4" width="13" height="13" rx="1"/><rect x="189.8" y="58.4" width="13" height="13" rx="1"/><rect x="204.4" y="58.4" width="13" height="13" rx="1"/><rect x="219.0" y="58.4" width="13" height="13" rx="1"/><rect x="233.6" y="58.4" width="13" height="13" rx="1"/><rect x="248.2" y="58.4" width="13" height="13" rx="1"/><rect x="0.0" y="73.0" width="13" height="13" rx="1"/><rect x="14.6" y="73.0" width="13" height="13" rx="1"/><rect x="29.2" y="120.0" width="13" height="13" rx="1"/><rect x="43.8" y="120.0" width="13" height="13" rx="1"/><rect x="58.4" y="120.0" width="13" height="13" rx="1"/><rect x="73.0" y="120.0" width="13" height="13" rx="1"/><rect x="87.6" y="120.0" width="13" height="13" rx="1"/><rect x="102.2" y="120.0" width="13" height="13" rx="1"/><rect x="116.8" y="120.0" width="13" height="13" rx="1"/><rect x="131.4" y="120.0" width="13" height="13" rx="1"/><rect x="146.0" y="120.0" width="13" height="13" rx="1"/><rect x="160.6" y="120.0" width="13" height="13" rx="1"/><rect x="175.2" y="120.0" width="13" height="13" rx="1"/><rect x="189.8" y="120.0" width="13" height="13" rx="1"/><rect x="204.4" y="120.0" width="13" height="13" rx="1"/><rect x="219.0" y="120.0" width="13" height="13" rx="1"/><rect x="233.6" y="120.0" width="13" height="13" rx="1"/><rect x="43.8" y="73.0" width="13" height="13" rx="1"/><rect x="58.4" y="73.0" width="13" height="13" rx="1"/><rect x="73.0" y="73.0" width="13" height="13" rx="1"/><rect x="87.6" y="73.0" width="13" height="13" rx="1"/><rect x="102.2" y="73.0" width="13" height="13" rx="1"/><rect x="116.8" y="73.0" width="13" height="13" rx="1"/><rect x="131.4" y="73.0" width="13" height="13" rx="1"/><rect x="146.0" y="73.0" width="13" height="13" rx="1"/><rect x="160.6" y="73.0" width="13" height="13" rx="1"/><rect x="175.2" y="73.0" width="13" height="13" rx="1"/><rect x="189.8" y="73.0" width="13" height="13" rx="1"/><rect x="204.4" y="73.0" width="13" height="13" rx="1"/><rect x="219.0" y="73.0" width="13" height="13" rx="1"/><rect x="233.6" y="73.0" width="13" height="13" rx="1"/><rect x="248.2" y="73.0" width="13" height="13" rx="1"/><rect x="0.0" y="87.6" width="13" height="13" rx="1"/><rect x="14.6" y="87.6" width="13" height="13" rx="1"/><rect x="29.2" y="134.6" width="13" height="13" rx="1"/><rect x="43.8" y="134.6" width="13" height="13" rx="1"/><rect x="58.4" y="134.6" width="13" height="13" rx="1"/><rect x="73.0" y="134.6" width="13" height="13" rx="1"/><rect x="87.6" y="134.6" width="13" height="13" rx="1"/><rect x="102.2" y="134.6" width="13" height="13" rx="1"/><rect x="116.8" y="134.6" width="13" height="13" rx="1"/><rect x="131.4" y="134.6" width="13" height="13" rx="1"/><rect x="146.0" y="134.6" width="13" height="13" rx="1"/><rect x="160.6" y="134.6" width="13" height="13" rx="1"/><rect x="175.2" y="134.6" width="13" height="13" rx="1"/><rect x="189.8" y="134.6" width="13" height="13" rx="1"/><rect x="204.4" y="134.6" width="13" height="13" rx="1"/><rect x="219.0" y="134.6" width="13" height="13" rx="1"/><rect x="233.6" y="134.6" width="13" height="13" rx="1"/><rect x="43.8" y="87.6" width="13" height="13" rx="1"/><rect x="58.4" y="87.6" width="13" height="13" rx="1"/><rect x="73.0" y="87.6" width="13" height="13" rx="1"/><rect x="87.6" y="87.6" width="13" height="13" rx="1"/><rect x="102.2" y="87.6" width="13" height="13" rx="1"/><rect x="116.8" y="87.6" width="13" height="13" rx="1"/><rect x="131.4" y="87.6" width="13" height="13" rx="1"/><rect x="146.0" y="87.6" width="13" height="13" rx="1"/><rect x="160.6" y="87.6" width="13" height="13" rx="1"/><rect x="175.2" y="87.6" width="13" height="13" rx="1"/><rect x="189.8" y="87.6" width="13" height="13" rx="1"/><rect x="204.4" y="87.6" width="13" height="13" rx="1"/><rect x="219.0" y="87.6" width="13" height="13" rx="1"/><rect x="233.6" y="87.6" width="13" height="13" rx="1"/><rect x="248.2" y="87.6" width="13" height="13" rx="1"/></svg></div>
+      <div class="pt pt--lit"><svg viewBox="0 0 261.2 147.6" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><rect class="pt-hot" style="--p:0" x="0.0" y="0.0" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:1" x="248.2" y="0.0" width="13" height="13" rx="1"/><rect x="0.0" y="14.6" width="13" height="13" rx="1"/><rect x="14.6" y="14.6" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:2" x="175.2" y="14.6" width="13" height="13" rx="1"/><rect x="189.8" y="14.6" width="13" height="13" rx="1"/><rect x="204.4" y="14.6" width="13" height="13" rx="1"/><rect x="219.0" y="14.6" width="13" height="13" rx="1"/><rect x="233.6" y="14.6" width="13" height="13" rx="1"/><rect x="248.2" y="14.6" width="13" height="13" rx="1"/><rect x="0.0" y="29.2" width="13" height="13" rx="1"/><rect x="14.6" y="29.2" width="13" height="13" rx="1"/><rect x="175.2" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:3" x="189.8" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:4" x="204.4" y="29.2" width="13" height="13" rx="1"/><rect x="219.0" y="29.2" width="13" height="13" rx="1"/><rect x="233.6" y="29.2" width="13" height="13" rx="1"/><rect x="248.2" y="29.2" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:5" x="0.0" y="43.8" width="13" height="13" rx="1"/><rect x="14.6" y="43.8" width="13" height="13" rx="1"/><rect x="29.2" y="43.8" width="13" height="13" rx="1"/><rect x="43.8" y="43.8" width="13" height="13" rx="1"/><rect x="58.4" y="43.8" width="13" height="13" rx="1"/><rect x="73.0" y="43.8" width="13" height="13" rx="1"/><rect x="87.6" y="43.8" width="13" height="13" rx="1"/><rect x="102.2" y="43.8" width="13" height="13" rx="1"/><rect x="116.8" y="43.8" width="13" height="13" rx="1"/><rect x="131.4" y="43.8" width="13" height="13" rx="1"/><rect x="146.0" y="43.8" width="13" height="13" rx="1"/><rect x="160.6" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:6" x="175.2" y="43.8" width="13" height="13" rx="1"/><rect x="189.8" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:7" x="204.4" y="43.8" width="13" height="13" rx="1"/><rect x="219.0" y="43.8" width="13" height="13" rx="1"/><rect class="pt-hot" style="--p:8" x="233.6" y="43.8" width="13" height="13" rx="1"/><rect x="248.2" y="43.8" width="13" height="13" rx="1"/><rect x="0.0" y="58.4" width="13" height="13" rx="1"/><rect x="14.6" y="58.4" width="13" height="13" rx="1"/><rect x="29.2" y="58.4" width="13" height="13" rx="1"/><rect x="43.8" y="58.4" width="13" height="13" rx="1"/><rect x="58.4" y="58.4" width="13" height="13" rx="1"/><rect x="73.0" y="58.4" width="13" height="13" rx="1"/><rect x="87.6" y="58.4" width="13" height="13" rx="1"/><rect x="102.2" y="58.4" width="13" height="13" rx="1"/><rect x="116.8" y="58.4" width="13" height="13" rx="1"/><rect x="131.4" y="58.4" width="13" height="13" rx="1"/><rect x="146.0" y="58.4" width="13" height="13" rx="1"/><rect x="160.6" y="58.4" width="13" height="13" rx="1"/><rect x="175.2" y="58.4" width="13" height="13" rx="1"/><rect x="189.8" y="58.4" width="13" height="13" rx="1"/><rect x="204.4" y="58.4" width="13" height="13" rx="1"/><rect x="219.0" y="58.4" width="13" height="13" rx="1"/><rect x="233.6" y="58.4" width="13" height="13" rx="1"/><rect x="248.2" y="58.4" width="13" height="13" rx="1"/><rect x="0.0" y="73.0" width="13" height="13" rx="1"/><rect x="14.6" y="73.0" width="13" height="13" rx="1"/><rect x="29.2" y="120.0" width="13" height="13" rx="1"/><rect x="43.8" y="120.0" width="13" height="13" rx="1"/><rect x="58.4" y="120.0" width="13" height="13" rx="1"/><rect x="73.0" y="120.0" width="13" height="13" rx="1"/><rect x="87.6" y="120.0" width="13" height="13" rx="1"/><rect x="102.2" y="120.0" width="13" height="13" rx="1"/><rect x="116.8" y="120.0" width="13" height="13" rx="1"/><rect x="131.4" y="120.0" width="13" height="13" rx="1"/><rect x="146.0" y="120.0" width="13" height="13" rx="1"/><rect x="160.6" y="120.0" width="13" height="13" rx="1"/><rect x="175.2" y="120.0" width="13" height="13" rx="1"/><rect x="189.8" y="120.0" width="13" height="13" rx="1"/><rect x="204.4" y="120.0" width="13" height="13" rx="1"/><rect x="219.0" y="120.0" width="13" height="13" rx="1"/><rect x="233.6" y="120.0" width="13" height="13" rx="1"/><rect x="43.8" y="73.0" width="13" height="13" rx="1"/><rect x="58.4" y="73.0" width="13" height="13" rx="1"/><rect x="73.0" y="73.0" width="13" height="13" rx="1"/><rect x="87.6" y="73.0" width="13" height="13" rx="1"/><rect x="102.2" y="73.0" width="13" height="13" rx="1"/><rect x="116.8" y="73.0" width="13" height="13" rx="1"/><rect x="131.4" y="73.0" width="13" height="13" rx="1"/><rect x="146.0" y="73.0" width="13" height="13" rx="1"/><rect x="160.6" y="73.0" width="13" height="13" rx="1"/><rect x="175.2" y="73.0" width="13" height="13" rx="1"/><rect x="189.8" y="73.0" width="13" height="13" rx="1"/><rect x="204.4" y="73.0" width="13" height="13" rx="1"/><rect x="219.0" y="73.0" width="13" height="13" rx="1"/><rect x="233.6" y="73.0" width="13" height="13" rx="1"/><rect x="248.2" y="73.0" width="13" height="13" rx="1"/><rect x="0.0" y="87.6" width="13" height="13" rx="1"/><rect x="14.6" y="87.6" width="13" height="13" rx="1"/><rect x="29.2" y="134.6" width="13" height="13" rx="1"/><rect x="43.8" y="134.6" width="13" height="13" rx="1"/><rect x="58.4" y="134.6" width="13" height="13" rx="1"/><rect x="73.0" y="134.6" width="13" height="13" rx="1"/><rect x="87.6" y="134.6" width="13" height="13" rx="1"/><rect x="102.2" y="134.6" width="13" height="13" rx="1"/><rect x="116.8" y="134.6" width="13" height="13" rx="1"/><rect x="131.4" y="134.6" width="13" height="13" rx="1"/><rect x="146.0" y="134.6" width="13" height="13" rx="1"/><rect x="160.6" y="134.6" width="13" height="13" rx="1"/><rect x="175.2" y="134.6" width="13" height="13" rx="1"/><rect x="189.8" y="134.6" width="13" height="13" rx="1"/><rect x="204.4" y="134.6" width="13" height="13" rx="1"/><rect x="219.0" y="134.6" width="13" height="13" rx="1"/><rect x="233.6" y="134.6" width="13" height="13" rx="1"/><rect x="43.8" y="87.6" width="13" height="13" rx="1"/><rect x="58.4" y="87.6" width="13" height="13" rx="1"/><rect x="73.0" y="87.6" width="13" height="13" rx="1"/><rect x="87.6" y="87.6" width="13" height="13" rx="1"/><rect x="102.2" y="87.6" width="13" height="13" rx="1"/><rect x="116.8" y="87.6" width="13" height="13" rx="1"/><rect x="131.4" y="87.6" width="13" height="13" rx="1"/><rect x="146.0" y="87.6" width="13" height="13" rx="1"/><rect x="160.6" y="87.6" width="13" height="13" rx="1"/><rect x="175.2" y="87.6" width="13" height="13" rx="1"/><rect x="189.8" y="87.6" width="13" height="13" rx="1"/><rect x="204.4" y="87.6" width="13" height="13" rx="1"/><rect x="219.0" y="87.6" width="13" height="13" rx="1"/><rect x="233.6" y="87.6" width="13" height="13" rx="1"/><rect x="248.2" y="87.6" width="13" height="13" rx="1"/></svg></div>
+    </div>
     <div class="shell hero__content">
       <p class="eyebrow rise" style="--d:.05s">Багш нарын баярын мэнд хүргэе</p>
       <p class="hero__salute rise" style="--d:.12s">Эрхэм хүндэт</p>
       <hr class="rule-copper draw" style="--d:.26s">
-      <h1 class="hero__to rise" style="--d:.2s">багшдаа</h1>
+      <h1 class="hero__to rise" style="--d:.2s" data-letters>багшдаа</h1>
       <p class="prose rise" style="--d:.32s">
         Энэхүү мэндчилгээ, цэцэг, бялууг хэрхэн бэлтгэснийг эндээс үзнэ үү.
       </p>
@@ -45,11 +55,17 @@
     </div>
   </section>
 
-  <div class="shell ornament"><svg viewBox="0 0 16 18" aria-hidden="true" focusable="false"><path d="M8 1 L15 5 L15 13 L8 17 L1 13 L1 5 Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
+  <!-- Гүйх хөвөө: баярын тууз -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__set">БАГШИЙН БАЯРЫН МЭНД<i></i>МУИС · ШУС · ХИМИЙН ТЭНХИМ<i></i>2026.10.05<i></i>БИДНИЙ БЭЛТГЭЛ<i></i>ЭРХЭМ ХҮНДЭТ БАГШДАА<i></i></span>
+      <span class="marquee__set">БАГШИЙН БАЯРЫН МЭНД<i></i>МУИС · ШУС · ХИМИЙН ТЭНХИМ<i></i>2026.10.05<i></i>БИДНИЙ БЭЛТГЭЛ<i></i>ЭРХЭМ ХҮНДЭТ БАГШДАА<i></i></span>
+    </div>
+  </div>
 
   <!-- ===================== бичлэг ===================== -->
   <section class="shell section" id="bichleg">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Бичлэг</p>
       <h2 class="section__title">Бидний бэлтгэл</h2>
       <p class="prose">
@@ -65,7 +81,7 @@
          videoSrc-д файлын зам эсвэл embed хаягийг бичихэд доорх
          хүрээ плеерээр солигдоно.
          ============================================================ -->
-    <div id="stage">
+    <div id="stage" data-reveal>
       <figure class="slate" aria-labelledby="slate-line">
         <div class="slate__rail" aria-hidden="true"></div>
         <div class="slate__body">
@@ -86,7 +102,7 @@
       </figure>
     </div>
 
-    <dl class="filmnotes">
+    <dl class="filmnotes" data-reveal>
       <div><dt>Үргэлжлэх хугацаа</dt><dd>Ойролцоогоор 6 минут</dd></div>
       <div><dt>Бэлтгэсэн</dt><dd>«Багш, химийн боловсрол» хөтөлбөрийн оюутнууд</dd></div>
       <div><dt>Нээлт</dt><dd>2026.10.05</dd></div>
@@ -99,7 +115,7 @@
   <!-- Нэг хүний нүд: assets/img/bagsh/ дотор зургаа тавиад доорх
        <li class="person"> блокийг хуулж, зам, нэр, албан тушаалыг солино. -->
   <section class="shell section" id="bagsh">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Химийн тэнхим</p>
       <h2 class="section__title">Багш нартаа</h2>
       <p class="prose">
@@ -108,7 +124,7 @@
       </p>
     </div>
 
-      <div class="roster__group">
+      <div class="roster__group" data-reveal>
         <p class="roster__label">Профессор</p>
         <ul class="roster">
           <li class="person">
@@ -149,7 +165,7 @@
           </li>
         </ul>
       </div>
-      <div class="roster__group">
+      <div class="roster__group" data-reveal>
         <p class="roster__label">Дэд профессор</p>
         <ul class="roster">
           <li class="person">
@@ -217,7 +233,7 @@
           </li>
         </ul>
       </div>
-      <div class="roster__group">
+      <div class="roster__group" data-reveal>
         <p class="roster__label">Багш</p>
         <ul class="roster">
           <li class="person">
@@ -246,7 +262,7 @@
           </li>
         </ul>
       </div>
-      <div class="roster__group">
+      <div class="roster__group" data-reveal>
         <p class="roster__label">Тэнхимийн хамт олон</p>
         <ul class="roster">
           <li class="person">
@@ -305,68 +321,68 @@
 
   <!-- ===================== сэжүүрийн тайлал ===================== -->
   <section class="shell section" id="taylal">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <p class="eyebrow">Сэжүүрийн хариу</p>
       <h2 class="section__title">Нууц үгийн тайлал</h2>
     </div>
 
-    <p class="solve__note">
-      Эхлээд картан дээрээ өөрөө тайлаад үзээрэй. Бэлэн болсон бол доорх товчийг
-      дарж хариугаа шалгана уу.
+    <p class="solve__note" data-reveal>
+      Эхлээд картан дээрээ өөрөө тайлаад үзээрэй. Нүд бүрийг дарж нэг нэгээр нь,
+      эсвэл доорх товчоор бүгдийг нь нээж болно.
     </p>
 
     <button class="reveal-btn" id="reveal" type="button" aria-expanded="false"
-            aria-controls="word1 word2 greeting">Хариуг харах</button>
+            aria-controls="word1 word2 greeting" data-reveal>Хариуг харах</button>
 
-    <div class="wordgroup">
+    <div class="wordgroup" data-reveal>
       <p class="wordgroup__label">1-р үг · 6 үсэг</p>
       <ul class="tiles" data-cols="6" id="word1">
-        <li class="tile" style="--i:0"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">2</span><span class="tile__sym">He</span><span class="tile__ltr">Б</span></div>
-        </div></li>
-        <li class="tile" style="--i:1"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">1</span><span class="tile__sym">H</span><span class="tile__ltr">А</span></div>
-        </div></li>
-        <li class="tile" style="--i:2"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">35</span><span class="tile__sym">Br</span><span class="tile__ltr">Я</span></div>
-        </div></li>
-        <li class="tile" style="--i:3"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">19</span><span class="tile__sym">K</span><span class="tile__ltr">Р</span></div>
-        </div></li>
-        <li class="tile" style="--i:4"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">31</span><span class="tile__sym">Ga</span><span class="tile__ltr">Ы</span></div>
-        </div></li>
-        <li class="tile" style="--i:5"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></div>
-        </div></li>
+        <li><button class="tile" type="button" style="--i:0" aria-label="Гели · атомын дугаар 2 · Б" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">2</span><span class="tile__sym">He</span><span class="tile__ltr">Б</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:1" aria-label="Устөрөгч · атомын дугаар 1 · А" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">1</span><span class="tile__sym">H</span><span class="tile__ltr">А</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:2" aria-label="Бром · атомын дугаар 35 · Я" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">35</span><span class="tile__sym">Br</span><span class="tile__ltr">Я</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:3" aria-label="Кали · атомын дугаар 19 · Р" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">19</span><span class="tile__sym">K</span><span class="tile__ltr">Р</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:4" aria-label="Галли · атомын дугаар 31 · Ы" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">31</span><span class="tile__sym">Ga</span><span class="tile__ltr">Ы</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:5" aria-label="Фосфор · атомын дугаар 15 · Н" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></span>
+        </span></button></li>
       </ul>
     </div>
 
-    <div class="wordgroup">
+    <div class="wordgroup" data-reveal>
       <p class="wordgroup__label">2-р үг · 4 үсэг</p>
       <ul class="tiles" data-cols="4" id="word2">
-        <li class="tile" style="--i:6"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">14</span><span class="tile__sym">Si</span><span class="tile__ltr">М</span></div>
-        </div></li>
-        <li class="tile" style="--i:7"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">33</span><span class="tile__sym">As</span><span class="tile__ltr">Э</span></div>
-        </div></li>
-        <li class="tile" style="--i:8"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></div>
-        </div></li>
-        <li class="tile" style="--i:9"><div class="tile__inner">
-          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
-          <div class="tile__face tile__face--a"><span class="tile__z">5</span><span class="tile__sym">B</span><span class="tile__ltr">Д</span></div>
-        </div></li>
+        <li><button class="tile" type="button" style="--i:6" aria-label="Цахиур · атомын дугаар 14 · М" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">14</span><span class="tile__sym">Si</span><span class="tile__ltr">М</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:7" aria-label="Хүнцэл · атомын дугаар 33 · Э" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">33</span><span class="tile__sym">As</span><span class="tile__ltr">Э</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:8" aria-label="Фосфор · атомын дугаар 15 · Н" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></span>
+        </span></button></li>
+        <li><button class="tile" type="button" style="--i:9" aria-label="Бор · атомын дугаар 5 · Д" aria-pressed="false"><span class="tile__inner">
+          <span class="tile__face tile__face--q" aria-hidden="true">?</span>
+          <span class="tile__face tile__face--a"><span class="tile__z">5</span><span class="tile__sym">B</span><span class="tile__ltr">Д</span></span>
+        </span></button></li>
       </ul>
       <p class="tiles__legend">Тайлал · дээр нь дугаар, доор нь үсэг</p>
     </div>
