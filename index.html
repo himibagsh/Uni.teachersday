@@ -1,262 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Thank You, Teachers</title>
-<meta name="description" content="Our university's Teachers' Day page: the programme for 5 October and the premiere of the students' film.">
-<meta name="theme-color" content="#eff1ed" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111614" media="(prefers-color-scheme: dark)">
+<title>Эрхэм хүндэт багшдаа</title>
+<meta name="description" content="МУИС · ШУС · Химийн тэнхимийн багш нартаа зориулсан баярын мэндчилгээ. «Багш, химийн боловсрол» хөтөлбөрийн оюутнууд. 2026.10.05">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10131f" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Thank you for teaching us">
-<meta property="og:description" content="Teachers' Day, 5 October. Open lectures, the programme, and a film from your students.">
+<meta property="og:title" content="Эрхэм хүндэт багшдаа">
+<meta property="og:description" content="Бидний бэлтгэл: мэндчилгээ, цэцэг, бялуу. МУИС · ШУС · Химийн тэнхим.">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="mn_MN">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=Archivo:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Golos+Text:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <header class="topbar">
   <div class="shell topbar__inner">
-    <a class="wordmark" href="#top">Teachers&rsquo; <b>Day</b></a>
-    <div class="topbar__meta">
-      <span class="topbar__date">Monday 5 October 2026</span>
-      <a class="topbar__jump" href="#premiere">The film</a>
-    </div>
+    <span class="topbar__org">МУИС · ШУС · Химийн тэнхим</span>
+    <span class="topbar__date">2026.10.05</span>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- ===================== hero ===================== -->
+  <!-- ===================== картны нүүр ===================== -->
   <section class="shell hero">
-    <p class="eyebrow reveal" style="--d:.05s">World Teachers&rsquo; Day &middot; 5 October 2026</p>
+    <p class="eyebrow rise" style="--d:.05s">Багш нарын баярын мэнд хүргэе</p>
 
-    <h1 class="hero__title reveal" style="--d:.12s">
-      Thank you for <em>teaching us.</em>
-    </h1>
+    <p class="hero__salute rise" style="--d:.12s">Эрхэм хүндэт</p>
+    <hr class="rule-copper draw" style="--d:.26s">
+    <h1 class="hero__to rise" style="--d:.2s">багшдаа</h1>
 
-    <hr class="rule-gold draw" style="--d:.3s">
-
-    <p class="prose reveal" style="--d:.26s">
-      Today the lecture halls belong to you. There are open lectures given by
-      your own students, a short film made for you, and cake in the faculty
-      lounge that will not last the morning.
+    <p class="prose rise" style="--d:.32s">
+      Энэхүү мэндчилгээ, цэцэг, бялууг хэрхэн бэлтгэснийг эндээс үзнэ үү.
     </p>
 
-    <div class="hero__foot reveal" style="--d:.36s">
-      <p class="stamp"><span>Hosted by</span><b>Our University &middot; Student Council</b></p>
-      <p class="stamp"><span>Doors open</span><b>08:45, Main Hall foyer</b></p>
-      <p class="stamp"><span>Premiere</span><b>12:00, Main Hall</b></p>
-    </div>
+    <p class="hero__meta rise" style="--d:.4s">
+      «Багш, химийн боловсрол» хөтөлбөрийн оюутнууд
+    </p>
   </section>
 
-  <!-- ===================== the film ===================== -->
-  <section class="shell section" id="premiere">
+  <!-- ===================== бичлэг ===================== -->
+  <section class="shell section" id="bichleg">
     <div class="section__head">
-      <p class="eyebrow">The film</p>
-      <h2 class="section__title">A premiere at noon</h2>
+      <p class="eyebrow">Бичлэг</p>
+      <h2 class="section__title">Бидний бэлтгэл</h2>
       <p class="prose">
-        Your students have been making something for you. It is still in the
-        edit, so the frame below is holding the seat. The player takes its
-        place as soon as the cut is finished.
+        Мэндчилгээний карт, цэцэг, бялууг хэрхэн бэлтгэснийг бичлэгт буулгасан.
+        Эвлүүлэг дуусмагц бичлэг доорх хүрээнд тавигдана.
       </p>
     </div>
 
-    <div class="premiere__grid">
+    <!-- ============================================================
+         БИЧЛЭГ ЭНД ОРНО.
+         Энэ хэсгийг гараар засах шаардлагагүй. assets/js/main.js
+         файлын эхэн дэх CONFIG хэсэгт videoReady-г true болгож,
+         videoSrc-д файлын зам эсвэл embed хаягийг бичихэд доорх
+         хүрээ плеерээр солигдоно.
+         ============================================================ -->
+    <div id="stage">
+      <figure class="slate" aria-labelledby="slate-line">
+        <div class="slate__rail" aria-hidden="true"></div>
 
-      <!-- ============================================================
-           THE VIDEO GOES HERE.
-           Nothing in this block needs editing by hand. Open
-           assets/js/main.js, set videoReady to true and point videoSrc at
-           either a file you have dropped into assets/video/ or an embed URL.
-           The script then replaces the slate below with the player.
-           ============================================================ -->
-      <div id="stage">
-        <figure class="slate" aria-labelledby="slate-line">
-          <div class="slate__stripes" aria-hidden="true"></div>
-
-          <div class="slate__body">
-            <p class="slate__kicker">Reel 1 &middot; not yet struck</p>
-            <p class="slate__line" id="slate-line">The film arrives Monday at noon</p>
-            <dl class="countdown" id="countdown" aria-live="off">
-              <div><dt>Days</dt><dd data-unit="days">--</dd></div>
-              <div><dt>Hours</dt><dd data-unit="hours">--</dd></div>
-              <div><dt>Minutes</dt><dd data-unit="minutes">--</dd></div>
-              <div><dt>Seconds</dt><dd data-unit="seconds">--</dd></div>
-            </dl>
-          </div>
-
-          <ul class="slate__status" id="status">
-            <li data-state="done">Filming</li>
-            <li data-state="active">Edit</li>
-            <li data-state="pending">Sound &amp; colour</li>
-          </ul>
-        </figure>
-      </div>
-
-      <dl class="premiere__notes">
-        <div class="notefield">
-          <dt>Title</dt>
-          <dd>To be announced on the day</dd>
+        <div class="slate__body">
+          <p class="slate__kicker" id="slate-kicker">Бичлэг · бэлтгэгдэж байна</p>
+          <p class="slate__line" id="slate-line">Бичлэг 10 дугаар сарын 5-нд нээгдэнэ</p>
+          <dl class="countdown" id="countdown">
+            <div><dt>Хоног</dt><dd data-unit="days">--</dd></div>
+            <div><dt>Цаг</dt><dd data-unit="hours">--</dd></div>
+            <div><dt>Минут</dt><dd data-unit="minutes">--</dd></div>
+            <div><dt>Секунд</dt><dd data-unit="seconds">--</dd></div>
+          </dl>
         </div>
-        <div class="notefield">
-          <dt>Runtime</dt>
-          <dd>Around six minutes</dd>
-        </div>
-        <div class="notefield">
-          <dt>Made by</dt>
-          <dd>Students of Our University, with the Student Council</dd>
-        </div>
-        <div class="notefield">
-          <dt>First screening</dt>
-          <dd>Main Hall, 12:00. The film appears on this page straight afterwards.</dd>
-        </div>
-      </dl>
 
+        <ul class="slate__status" id="status">
+          <li data-state="done">Зураг авалт</li>
+          <li data-state="active">Эвлүүлэг</li>
+          <li data-state="pending">Дуу, өнгө</li>
+        </ul>
+      </figure>
     </div>
+
+    <dl class="filmnotes">
+      <div><dt>Үргэлжлэх хугацаа</dt><dd>Ойролцоогоор 6 минут</dd></div>
+      <div><dt>Бэлтгэсэн</dt><dd>«Багш, химийн боловсрол» хөтөлбөрийн оюутнууд</dd></div>
+      <div><dt>Нээлт</dt><dd>2026.10.05</dd></div>
+    </dl>
   </section>
 
-  <!-- ===================== programme ===================== -->
-  <section class="shell section" id="programme">
+  <!-- ===================== сэжүүрийн тайлал ===================== -->
+  <section class="shell section" id="taylal">
     <div class="section__head">
-      <p class="eyebrow">Monday 5 October</p>
-      <h2 class="section__title">Programme of the day</h2>
-      <p class="prose">Everything happens on campus. No sign-up, no ticket.</p>
+      <p class="eyebrow">Сэжүүрийн хариу</p>
+      <h2 class="section__title">Нууц үгийн тайлал</h2>
     </div>
 
-    <ol class="ledger">
-      <li class="ledger__row">
-        <span class="ledger__time">08:45</span>
-        <span class="ledger__no">01</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Doors open</h3>
-          <p class="ledger__where">Main Hall foyer</p>
-        </div>
-      </li>
-      <li class="ledger__row">
-        <span class="ledger__time">09:00</span>
-        <span class="ledger__no">02</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Opening address</h3>
-          <p class="ledger__where">Main Hall &middot; Rector and Student Council</p>
-        </div>
-      </li>
-      <li class="ledger__row">
-        <span class="ledger__time">09:30</span>
-        <span class="ledger__no">03</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Open lectures, taught by students</h3>
-          <p class="ledger__where">Rooms 104, 207, 311 &middot; thirty minutes each</p>
-        </div>
-      </li>
-      <li class="ledger__row">
-        <span class="ledger__time">11:00</span>
-        <span class="ledger__no">04</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Coffee, tea and the cake</h3>
-          <p class="ledger__where">Faculty lounge, second floor</p>
-        </div>
-      </li>
-      <li class="ledger__row" data-headline="true">
-        <span class="ledger__time">12:00</span>
-        <span class="ledger__no">05</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Premiere of the film</h3>
-          <p class="ledger__where">Main Hall &middot; made by your students</p>
-        </div>
-        <a class="ledger__tag" href="#premiere">Countdown</a>
-      </li>
-      <li class="ledger__row">
-        <span class="ledger__time">13:00</span>
-        <span class="ledger__no">06</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Long service and teaching awards</h3>
-          <p class="ledger__where">Main Hall</p>
-        </div>
-      </li>
-      <li class="ledger__row">
-        <span class="ledger__time">14:00</span>
-        <span class="ledger__no">07</span>
-        <div class="ledger__body">
-          <h3 class="ledger__name">Photographs on the front steps</h3>
-          <p class="ledger__where">Everyone, all faculties, rain or not</p>
-        </div>
-      </li>
-    </ol>
-  </section>
+    <p class="solve__note">
+      Эхлээд картан дээрээ өөрөө тайлаад үзээрэй. Бэлэн болсон бол доорх товчийг
+      дарж хариугаа шалгана уу.
+    </p>
 
-  <!-- ===================== quotes ===================== -->
-  <section class="shell section" id="on-teaching">
-    <div class="section__head">
-      <p class="eyebrow">Borrowed words</p>
-      <h2 class="section__title">On teaching</h2>
-    </div>
+    <button class="reveal-btn" id="reveal" type="button" aria-expanded="false"
+            aria-controls="word1 word2 greeting">Хариуг харах</button>
 
-    <div class="cards">
-      <figure class="card">
-        <blockquote>I am not a teacher, but an awakener.</blockquote>
-        <figcaption>Robert Frost</figcaption>
-      </figure>
-      <figure class="card">
-        <blockquote>A teacher affects eternity; he can never tell where his influence stops.</blockquote>
-        <figcaption>Henry Adams</figcaption>
-      </figure>
-      <figure class="card">
-        <blockquote>What we want is to see the child in pursuit of knowledge, and not knowledge in pursuit of the child.</blockquote>
-        <figcaption>George Bernard Shaw</figcaption>
-      </figure>
-      <figure class="card">
-        <blockquote>The whole art of teaching is only the art of awakening the natural curiosity of young minds.</blockquote>
-        <figcaption>Anatole France</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ===================== the faculty ===================== -->
-  <section class="shell section" id="faculty">
-    <div class="section__head">
-      <p class="eyebrow">Every corridor</p>
-      <h2 class="section__title">To the whole faculty</h2>
-    </div>
-
-    <div class="faculty">
-      <p class="dedication">
-        The ones who stayed after the bell, who marked the paper twice,
-        who answered the email at eleven at night. <em>All of it counted.</em>
-      </p>
-
-      <ul class="roll">
-        <li>Mathematics</li>
-        <li>Physics</li>
-        <li>Chemistry</li>
-        <li>Biology</li>
-        <li>Literature</li>
-        <li>History</li>
-        <li>Philosophy</li>
-        <li>Economics</li>
-        <li>Law</li>
-        <li>Informatics</li>
-        <li>Engineering</li>
-        <li>Medicine</li>
-        <li>Foreign languages</li>
-        <li>Art and design</li>
-        <li>Music</li>
-        <li>Physical education</li>
+    <div class="wordgroup">
+      <p class="wordgroup__label">1-р үг · 6 үсэг</p>
+      <ul class="tiles" data-cols="6" id="word1">
+        <li class="tile" style="--i:0"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">2</span><span class="tile__sym">He</span><span class="tile__ltr">Б</span></div>
+        </div></li>
+        <li class="tile" style="--i:1"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">1</span><span class="tile__sym">H</span><span class="tile__ltr">А</span></div>
+        </div></li>
+        <li class="tile" style="--i:2"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">35</span><span class="tile__sym">Br</span><span class="tile__ltr">Я</span></div>
+        </div></li>
+        <li class="tile" style="--i:3"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">19</span><span class="tile__sym">K</span><span class="tile__ltr">Р</span></div>
+        </div></li>
+        <li class="tile" style="--i:4"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">31</span><span class="tile__sym">Ga</span><span class="tile__ltr">Ы</span></div>
+        </div></li>
+        <li class="tile" style="--i:5"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></div>
+        </div></li>
       </ul>
     </div>
+
+    <div class="wordgroup">
+      <p class="wordgroup__label">2-р үг · 4 үсэг</p>
+      <ul class="tiles" data-cols="4" id="word2">
+        <li class="tile" style="--i:6"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">14</span><span class="tile__sym">Si</span><span class="tile__ltr">М</span></div>
+        </div></li>
+        <li class="tile" style="--i:7"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">33</span><span class="tile__sym">As</span><span class="tile__ltr">Э</span></div>
+        </div></li>
+        <li class="tile" style="--i:8"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">15</span><span class="tile__sym">P</span><span class="tile__ltr">Н</span></div>
+        </div></li>
+        <li class="tile" style="--i:9"><div class="tile__inner">
+          <div class="tile__face tile__face--q" aria-hidden="true">?</div>
+          <div class="tile__face tile__face--a"><span class="tile__z">5</span><span class="tile__sym">B</span><span class="tile__ltr">Д</span></div>
+        </div></li>
+      </ul>
+      <p class="tiles__legend">Тайлал · дээр нь дугаар, доор нь үсэг</p>
+    </div>
+
+    <div class="greeting" id="greeting" hidden>
+      <p class="greeting__word">БАЯРЫН МЭНД</p>
+      <p class="greeting__text">
+        Химийн ертөнцийн нууцыг бидэнд тайлж өгдөг шигээ Та энэ мэндчилгээг ч
+        амжилттай тайллаа. Та бол бидний мэдлэгийн хамгийн найдвартай катализатор.
+        Баярлалаа!
+      </p>
+      <p class="greeting__sign">— Таны шавь нар</p>
+    </div>
+  </section>
+
+  <!-- ===================== багш нар ===================== -->
+  <!-- Багш нарын нэр, зургийг assets/js/main.js доторх TEACHERS жагсаалтад
+       нэмэхэд энэ хэсэг өөрөө гарч ирнэ. Хоосон байвал нуугдана. -->
+  <section class="shell section" id="bagsh" hidden>
+    <div class="section__head">
+      <p class="eyebrow">Химийн тэнхим</p>
+      <h2 class="section__title">Багш нартаа</h2>
+    </div>
+    <ul class="teachers" id="teachers"></ul>
   </section>
 
 </main>
 
 <footer class="shell footer">
-  <p class="footer__sign">See you in the Main Hall.</p>
-  <div class="footer__row">
-    <span>Made by the students of Our University</span>
-    <span>Times may shift by a few minutes. The cake will not wait.</span>
-  </div>
+  <p class="footer__sign">Таны шавь нар</p>
+  <p class="footer__org">
+    «Багш, химийн боловсрол» хөтөлбөрийн оюутнууд<br>
+    МУИС · ШУС · Химийн тэнхим · 2026.10.05
+  </p>
 </footer>
 
 <script src="assets/js/main.js"></script>

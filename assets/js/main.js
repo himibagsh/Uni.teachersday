@@ -1,32 +1,42 @@
-/* Teachers' Day page.
-   This is the only file you need to edit when the film is ready. */
+/* Багшийн баярын хуудас.
+   Бичлэг бэлэн болоход зөвхөн энэ файлыг засна. */
 
 'use strict';
 
 var CONFIG = {
 
-  /* When the film is first shown, read on the viewer's own clock. */
+  /* Бичлэгийн нээлт. Үзэгчийн утасны цагаар тоолно. */
   premiere: '2026-10-05T12:00:00',
 
-  /* Flip this to true once the cut is finished, then fill in videoSrc.
-     The slate is replaced by a real player and the countdown stops. */
+  /* Эвлүүлэг дуусмагц үүнийг true болгоод videoSrc-г бөглөнө.
+     Ингэснээр хүрээ плеерээр солигдож, тоолуур зогсоно. */
   videoReady: false,
 
-  /* Either a file dropped into assets/video/ ...
-       videoSrc: 'assets/video/teachers-day.mp4'
-     ... or an embed address from YouTube or Vimeo:
+  /* Эсвэл assets/video/ дотор хийсэн файл:
+       videoSrc: 'assets/video/beltgel.mp4'
+     эсвэл YouTube, Vimeo-гийн embed хаяг:
        videoSrc: 'https://www.youtube.com/embed/VIDEO_ID'          */
   videoSrc: '',
 
-  /* Optional still frame, used only for a self-hosted file. */
+  /* Өөрийн файл тавьсан бол нүүр зураг. */
   videoPoster: '',
 
-  /* How far the production has got. One of 'done', 'active', 'pending'. */
+  /* Бэлтгэлийн явц: 'done', 'active', 'pending'. */
   stages: [
-    { label: 'Filming',        state: 'done'    },
-    { label: 'Edit',           state: 'active'  },
-    { label: 'Sound & colour', state: 'pending' }
-  ]
+    { label: 'Зураг авалт', state: 'done'    },
+    { label: 'Эвлүүлэг',    state: 'active'  },
+    { label: 'Дуу, өнгө',   state: 'pending' }
+  ],
+
+  /* Багш нарын жагсаалт. Нэг ч багш нэмэхэд «Багш нартаа» хэсэг
+     өөрөө гарч ирнэ. Жишээ:
+
+       { name: 'Б. Отгонбаатар', role: 'Профессор', symbol: 'От',
+         photo: 'assets/img/bagsh/otgonbaatar.jpg' }
+
+     symbol нь элементийн тэмдэг шиг 1-2 үсэг. photo байхгүй бол
+     symbol нь нүүрний оронд харагдана. */
+  teachers: []
 };
 
 (function () {
@@ -35,8 +45,11 @@ var CONFIG = {
   var statusList = document.getElementById('status');
   var countdown = document.getElementById('countdown');
   var slateLine = document.getElementById('slate-line');
+  var slateKicker = document.getElementById('slate-kicker');
 
-  /* ---- production stages ---- */
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- бэлтгэлийн явц ---- */
 
   function drawStages() {
     if (!statusList || !CONFIG.stages || !CONFIG.stages.length) return;
@@ -49,7 +62,7 @@ var CONFIG = {
     });
   }
 
-  /* ---- the player, once there is something to play ---- */
+  /* ---- бичлэг бэлэн болоход ---- */
 
   function buildPlayer(src, poster) {
     if (/\.(mp4|webm|ogv|ogg|mov|m4v)(\?|#|$)/i.test(src)) {
@@ -66,7 +79,7 @@ var CONFIG = {
     var frame = document.createElement('iframe');
     frame.className = 'player';
     frame.src = src;
-    frame.title = 'Teachers’ Day film';
+    frame.title = 'Бидний бэлтгэл';
     frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     frame.referrerPolicy = 'strict-origin-when-cross-origin';
     frame.allowFullscreen = true;
@@ -81,7 +94,7 @@ var CONFIG = {
     return true;
   }
 
-  /* ---- countdown to the premiere ---- */
+  /* ---- нээлт хүртэлх тоолуур ---- */
 
   function pad(n) {
     return (n < 10 ? '0' : '') + n;
@@ -94,9 +107,8 @@ var CONFIG = {
 
   function arrived() {
     if (countdown) countdown.hidden = true;
-    if (slateLine) slateLine.textContent = 'The premiere is under way in the Main Hall';
-    var kicker = document.querySelector('.slate__kicker');
-    if (kicker) kicker.textContent = 'Reel 1 · rolling';
+    if (slateLine) slateLine.textContent = 'Бичлэг удахгүй энд тавигдана';
+    if (slateKicker) slateKicker.textContent = 'Бичлэг · эцсийн засвар';
   }
 
   function startCountdown() {
@@ -110,12 +122,10 @@ var CONFIG = {
 
     function tick() {
       var left = target - Date.now();
-
       if (left <= 0) {
         arrived();
         return false;
       }
-
       var seconds = Math.floor(left / 1000);
       put('days', String(Math.floor(seconds / 86400)));
       put('hours', pad(Math.floor(seconds / 3600) % 24));
@@ -131,9 +141,108 @@ var CONFIG = {
     }
   }
 
-  /* ---- go ---- */
+  /* ---- сэжүүрийн тайлал ---- */
+
+  function wireReveal() {
+    var button = document.getElementById('reveal');
+    var greeting = document.getElementById('greeting');
+    var groups = [document.getElementById('word1'), document.getElementById('word2')];
+    if (!button || !greeting) return;
+
+    var open = false;
+    var pending = null;
+
+    button.addEventListener('click', function () {
+      open = !open;
+      if (pending) { clearTimeout(pending); pending = null; }
+
+      groups.forEach(function (g) {
+        if (g) g.classList.toggle('is-open', open);
+      });
+
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      button.textContent = open ? 'Хариуг нуух' : 'Хариуг харах';
+
+      if (!open) {
+        greeting.hidden = true;
+        return;
+      }
+      if (calm) {
+        greeting.hidden = false;
+      } else {
+        /* Бүх хавтас эргэж дуусахыг хүлээнэ. */
+        pending = setTimeout(function () {
+          greeting.hidden = false;
+          pending = null;
+        }, 1150);
+      }
+    });
+  }
+
+  /* ---- багш нар ---- */
+
+  function renderTeachers() {
+    var section = document.getElementById('bagsh');
+    var list = document.getElementById('teachers');
+    if (!section || !list) return;
+
+    var people = CONFIG.teachers || [];
+    if (!people.length) return;
+
+    people.forEach(function (person, index) {
+      var li = document.createElement('li');
+      li.className = 'teacher';
+
+      var tile = document.createElement('div');
+      tile.className = 'teacher__tile';
+
+      if (person.photo) {
+        var img = document.createElement('img');
+        img.className = 'teacher__photo';
+        img.src = person.photo;
+        img.alt = person.name || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        tile.appendChild(img);
+      } else {
+        var sym = document.createElement('span');
+        sym.className = 'teacher__sym';
+        sym.textContent = person.symbol || (person.name || '?').trim().charAt(0);
+        tile.appendChild(sym);
+      }
+
+      var z = document.createElement('span');
+      z.className = 'teacher__z';
+      z.textContent = String(index + 1);
+      tile.appendChild(z);
+
+      li.appendChild(tile);
+
+      if (person.name) {
+        var name = document.createElement('p');
+        name.className = 'teacher__name';
+        name.textContent = person.name;
+        li.appendChild(name);
+      }
+
+      if (person.role) {
+        var role = document.createElement('p');
+        role.className = 'teacher__role';
+        role.textContent = person.role;
+        li.appendChild(role);
+      }
+
+      list.appendChild(li);
+    });
+
+    section.hidden = false;
+  }
+
+  /* ---- эхлэл ---- */
 
   drawStages();
   if (!mountPlayer()) startCountdown();
+  wireReveal();
+  renderTeachers();
 
 }());
