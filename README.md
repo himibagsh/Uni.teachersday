@@ -134,6 +134,38 @@ zoom for the few whose face sat small in a busy frame.
 For a colour set instead of the ink one, delete the `duotone(...)` call in the
 script and re-run.
 
+### Pen drawings from the photographs
+
+`scripts/ink.py` converts the photographs into pen drawings, to sit closer to
+the hand-drawn cards. A local-mean threshold traces edges, so dark hair becomes
+hatching instead of a solid mass, and the threshold auto-solves per photograph
+so 23 very different sources land on the same ink density. Nothing is invented:
+every line comes from the supplied photograph.
+
+The results are in `assets/img/bagsh-ink/`. **The page does not use them**, and
+that is a judgement, not an oversight. About fourteen of the twenty-three are
+good. The rest fail for reasons no parameter fixes:
+
+- **02, 12** — the photograph is mostly background. The banner behind
+  Наранмандах and the lab signage behind Оюунбилэг have stronger edges than the
+  face, so the conversion draws the room instead of the person.
+- **08, 18** — glasses, a microphone and low resolution break the features into
+  disconnected strokes.
+- **04** — a patterned blouse turns into a field of stipple that outweighs the face.
+- **20** — edge tracing exaggerates every line on a face. It is accurate and
+  unkind, which is the wrong thing to hand someone on their own holiday.
+
+To switch the page over anyway:
+
+```sh
+sed -i 's|img/bagsh/|img/bagsh-ink/|g' index.html
+```
+
+The better route is the one already under way: the hand drawings on the cards
+are better than anything this script produces. Photograph or scan them square
+and evenly lit, save them into `assets/img/bagsh/`, and the page carries the
+real drawings with no code change at all.
+
 ### The group sheet
 
 `print/khamt-olon.png` is all 23 laid out as one sheet, same cells and same
