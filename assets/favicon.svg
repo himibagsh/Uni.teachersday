@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Teachers' Day">
+  <rect width="64" height="64" rx="10" fill="#18211d"/>
+  <rect x="11" y="15" width="42" height="28" rx="2" fill="none" stroke="#8a6a22" stroke-width="3"/>
+  <path d="M19 36c4-9 9-13 13-13s9 4 13 13" fill="none" stroke="#eff1ed" stroke-width="3" stroke-linecap="round"/>
+  <path d="M26 50h12" stroke="#8a6a22" stroke-width="3" stroke-linecap="round"/>
+</svg>

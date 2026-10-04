@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thank You, Teachers</title>
+<meta name="description" content="Our university's Teachers' Day page: the programme for 5 October and the premiere of the students' film.">
+<meta name="theme-color" content="#eff1ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111614" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Thank you for teaching us">
+<meta property="og:description" content="Teachers' Day, 5 October. Open lectures, the programme, and a film from your students.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=Archivo:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell topbar__inner">
+    <a class="wordmark" href="#top">Teachers&rsquo; <b>Day</b></a>
+    <div class="topbar__meta">
+      <span class="topbar__date">Monday 5 October 2026</span>
+      <a class="topbar__jump" href="#premiere">The film</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== hero ===================== -->
+  <section class="shell hero">
+    <p class="eyebrow reveal" style="--d:.05s">World Teachers&rsquo; Day &middot; 5 October 2026</p>
+
+    <h1 class="hero__title reveal" style="--d:.12s">
+      Thank you for <em>teaching us.</em>
+    </h1>
+
+    <hr class="rule-gold draw" style="--d:.3s">
+
+    <p class="prose reveal" style="--d:.26s">
+      Today the lecture halls belong to you. There are open lectures given by
+      your own students, a short film made for you, and cake in the faculty
+      lounge that will not last the morning.
+    </p>
+
+    <div class="hero__foot reveal" style="--d:.36s">
+      <p class="stamp"><span>Hosted by</span><b>Our University &middot; Student Council</b></p>
+      <p class="stamp"><span>Doors open</span><b>08:45, Main Hall foyer</b></p>
+      <p class="stamp"><span>Premiere</span><b>12:00, Main Hall</b></p>
+    </div>
+  </section>
+
+  <!-- ===================== the film ===================== -->
+  <section class="shell section" id="premiere">
+    <div class="section__head">
+      <p class="eyebrow">The film</p>
+      <h2 class="section__title">A premiere at noon</h2>
+      <p class="prose">
+        Your students have been making something for you. It is still in the
+        edit, so the frame below is holding the seat. The player takes its
+        place as soon as the cut is finished.
+      </p>
+    </div>
+
+    <div class="premiere__grid">
+
+      <!-- ============================================================
+           THE VIDEO GOES HERE.
+           Nothing in this block needs editing by hand. Open
+           assets/js/main.js, set videoReady to true and point videoSrc at
+           either a file you have dropped into assets/video/ or an embed URL.
+           The script then replaces the slate below with the player.
+           ============================================================ -->
+      <div id="stage">
+        <figure class="slate" aria-labelledby="slate-line">
+          <div class="slate__stripes" aria-hidden="true"></div>
+
+          <div class="slate__body">
+            <p class="slate__kicker">Reel 1 &middot; not yet struck</p>
+            <p class="slate__line" id="slate-line">The film arrives Monday at noon</p>
+            <dl class="countdown" id="countdown" aria-live="off">
+              <div><dt>Days</dt><dd data-unit="days">--</dd></div>
+              <div><dt>Hours</dt><dd data-unit="hours">--</dd></div>
+              <div><dt>Minutes</dt><dd data-unit="minutes">--</dd></div>
+              <div><dt>Seconds</dt><dd data-unit="seconds">--</dd></div>
+            </dl>
+          </div>
+
+          <ul class="slate__status" id="status">
+            <li data-state="done">Filming</li>
+            <li data-state="active">Edit</li>
+            <li data-state="pending">Sound &amp; colour</li>
+          </ul>
+        </figure>
+      </div>
+
+      <dl class="premiere__notes">
+        <div class="notefield">
+          <dt>Title</dt>
+          <dd>To be announced on the day</dd>
+        </div>
+        <div class="notefield">
+          <dt>Runtime</dt>
+          <dd>Around six minutes</dd>
+        </div>
+        <div class="notefield">
+          <dt>Made by</dt>
+          <dd>Students of Our University, with the Student Council</dd>
+        </div>
+        <div class="notefield">
+          <dt>First screening</dt>
+          <dd>Main Hall, 12:00. The film appears on this page straight afterwards.</dd>
+        </div>
+      </dl>
+
+    </div>
+  </section>
+
+  <!-- ===================== programme ===================== -->
+  <section class="shell section" id="programme">
+    <div class="section__head">
+      <p class="eyebrow">Monday 5 October</p>
+      <h2 class="section__title">Programme of the day</h2>
+      <p class="prose">Everything happens on campus. No sign-up, no ticket.</p>
+    </div>
+
+    <ol class="ledger">
+      <li class="ledger__row">
+        <span class="ledger__time">08:45</span>
+        <span class="ledger__no">01</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Doors open</h3>
+          <p class="ledger__where">Main Hall foyer</p>
+        </div>
+      </li>
+      <li class="ledger__row">
+        <span class="ledger__time">09:00</span>
+        <span class="ledger__no">02</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Opening address</h3>
+          <p class="ledger__where">Main Hall &middot; Rector and Student Council</p>
+        </div>
+      </li>
+      <li class="ledger__row">
+        <span class="ledger__time">09:30</span>
+        <span class="ledger__no">03</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Open lectures, taught by students</h3>
+          <p class="ledger__where">Rooms 104, 207, 311 &middot; thirty minutes each</p>
+        </div>
+      </li>
+      <li class="ledger__row">
+        <span class="ledger__time">11:00</span>
+        <span class="ledger__no">04</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Coffee, tea and the cake</h3>
+          <p class="ledger__where">Faculty lounge, second floor</p>
+        </div>
+      </li>
+      <li class="ledger__row" data-headline="true">
+        <span class="ledger__time">12:00</span>
+        <span class="ledger__no">05</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Premiere of the film</h3>
+          <p class="ledger__where">Main Hall &middot; made by your students</p>
+        </div>
+        <a class="ledger__tag" href="#premiere">Countdown</a>
+      </li>
+      <li class="ledger__row">
+        <span class="ledger__time">13:00</span>
+        <span class="ledger__no">06</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Long service and teaching awards</h3>
+          <p class="ledger__where">Main Hall</p>
+        </div>
+      </li>
+      <li class="ledger__row">
+        <span class="ledger__time">14:00</span>
+        <span class="ledger__no">07</span>
+        <div class="ledger__body">
+          <h3 class="ledger__name">Photographs on the front steps</h3>
+          <p class="ledger__where">Everyone, all faculties, rain or not</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===================== quotes ===================== -->
+  <section class="shell section" id="on-teaching">
+    <div class="section__head">
+      <p class="eyebrow">Borrowed words</p>
+      <h2 class="section__title">On teaching</h2>
+    </div>
+
+    <div class="cards">
+      <figure class="card">
+        <blockquote>I am not a teacher, but an awakener.</blockquote>
+        <figcaption>Robert Frost</figcaption>
+      </figure>
+      <figure class="card">
+        <blockquote>A teacher affects eternity; he can never tell where his influence stops.</blockquote>
+        <figcaption>Henry Adams</figcaption>
+      </figure>
+      <figure class="card">
+        <blockquote>What we want is to see the child in pursuit of knowledge, and not knowledge in pursuit of the child.</blockquote>
+        <figcaption>George Bernard Shaw</figcaption>
+      </figure>
+      <figure class="card">
+        <blockquote>The whole art of teaching is only the art of awakening the natural curiosity of young minds.</blockquote>
+        <figcaption>Anatole France</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== the faculty ===================== -->
+  <section class="shell section" id="faculty">
+    <div class="section__head">
+      <p class="eyebrow">Every corridor</p>
+      <h2 class="section__title">To the whole faculty</h2>
+    </div>
+
+    <div class="faculty">
+      <p class="dedication">
+        The ones who stayed after the bell, who marked the paper twice,
+        who answered the email at eleven at night. <em>All of it counted.</em>
+      </p>
+
+      <ul class="roll">
+        <li>Mathematics</li>
+        <li>Physics</li>
+        <li>Chemistry</li>
+        <li>Biology</li>
+        <li>Literature</li>
+        <li>History</li>
+        <li>Philosophy</li>
+        <li>Economics</li>
+        <li>Law</li>
+        <li>Informatics</li>
+        <li>Engineering</li>
+        <li>Medicine</li>
+        <li>Foreign languages</li>
+        <li>Art and design</li>
+        <li>Music</li>
+        <li>Physical education</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="shell footer">
+  <p class="footer__sign">See you in the Main Hall.</p>
+  <div class="footer__row">
+    <span>Made by the students of Our University</span>
+    <span>Times may shift by a few minutes. The cake will not wait.</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
