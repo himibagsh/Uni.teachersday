@@ -193,6 +193,40 @@ are better than anything this script produces. Photograph or scan them square
 and evenly lit, save them into `assets/img/bagsh/`, and the page carries the
 real drawings with no code change at all.
 
+### Resolution
+
+The portraits render at 440 x 550. Phones paint a roster cell at about three
+times its CSS size, so a 150 px original stretched by the browser goes soft;
+`scripts/enhance.py` pre-scales with Lanczos and applies a sharpening amount
+tuned to how far each one was pushed, which is cleaner than the browser's own
+stretch.
+
+It cannot invent detail that was never captured. Measured as Laplacian
+variance at the size a phone actually draws, a 240 px source improves about
+threefold and a 105 x 131 source barely moves.
+
+**Thirteen of the twenty-three would improve far more from files the
+department already has.** Nineteen portraits were cut out of the roster contact
+sheet, which is a page of thumbnails: the dimensions printed under each face on
+that sheet are the real files, and several are much larger than the thumbnail.
+
+| Teacher | On the page | Their file | Gain |
+| --- | --- | --- | --- |
+| Ж.Ирэхбаяр | 205 px | 2417 x 3223 | 11.8x |
+| Г.Энхжаргал | 191 px | 1457 x 2233 | 7.6x |
+| Ч.Буян | 177 px | 900 x 950 | 4.3x |
+| Ч.Нямгэрэл | 219 px | 720 x 960 | 3.3x |
+| Г.Оюунбилэг | 101 px | 330 x 330 | 2.6x |
+| Б.Мөнхжаргал | 187 px | 600 x 600 | 2.6x |
+| Т.Сарантуяа, Ш.Сайнбилэг, Ш.Наранмандах, Б.Энхсаруул, И.Саруул, А.Алтангэрэл, Б.Сүхбаатар | | | 1.5–1.9x |
+
+Drop the real files into a folder and re-run `scripts/portraits.py` with
+`PORTRAIT_SRC` pointing at it, then `scripts/enhance.py`.
+
+Six are genuinely 105 x 131 — Манлайбаатар, Долгормаа, Гансувд, Ербулан,
+Хишигсүрэн, Хонгорзул. That is the whole photograph, not a crop of it. Only a
+new photograph fixes those.
+
 ### The group sheet
 
 `print/khamt-olon.png` is all 23 laid out as one sheet, same cells and same
