@@ -18,7 +18,8 @@ assets/js/main.js        <- the only file you edit
 assets/favicon.svg
 assets/img/bagsh/        <- the 23 portraits, ink duotone, 4:5
 assets/video/            <- a self-hosted film goes here
-print/qr.svg             <- the QR code for the card
+print/qr-stickers.pdf    <- print this: 40 stickers + one large
+print/qr.svg             <- plain black code, for anything else
 print/qr.png
 print/khamt-olon.png     <- the department as one sheet
 ```
@@ -32,22 +33,47 @@ python3 -m http.server 8000
 
 ## The QR code for the card
 
-`print/qr.svg` (vector, best for print) and `print/qr.png` (900 × 900) both
-encode:
+The box on the card measures 50 x 50 mm, so the sticker is 45 mm and sits
+inside it with a 2.5 mm margin all round.
 
-```
-https://himibagsh.github.io/Uni.teachersday/
-```
+**`print/qr-stickers.pdf`** is what you print. Three pages:
 
-The code uses error-correction level H, so it still scans with glue, a fold or
-a smudge across a corner. Place it in the "QR код наах хэсэг" box on the back of
-the card at 30–40 mm and keep the white margin around it — that quiet zone is
-part of the code.
+| Page | Contents |
+| --- | --- |
+| 1 | 20 stickers, 45 mm, with cut guides |
+| 2 | the same 20 again — 40 in total, for 23 teachers plus spares |
+| 3 | one 120 mm code with the address underneath, for a door or noticeboard |
 
-**Before printing**, publish the site and scan the code with a real phone. The
-URL only works once GitHub Pages is switched on (below). If you ever change the
-repository name or the branch Pages serves from, the URL changes and every
-printed card goes dead — regenerate the code at that point.
+Everything in it is vector, so it stays sharp at any size. Print it on A4
+sticker paper at 100% — **not** "fit to page", which would shrink it.
+
+`print/qr.svg` and `print/qr.png` are the plain black version, kept for anything
+else that needs a code.
+
+### Why the decorated one still scans
+
+Scanners threshold on luminance, not colour, so the rules are about how dark
+the modules are rather than what hue they carry:
+
+- The ramp runs between a deepened copper `#a8491f` and the card's navy
+  `#151a33`, both far darker than the paper. Copper is the lighter end, at
+  about 5.7:1 against the background, which is still comfortable.
+- Error correction stays at level H, recovering 30%. The cleared centre holding
+  the benzene mark is 49 of 1369 modules, about 3.6%, so it spends a small part
+  of that budget.
+- The three corner eyes keep their exact proportions. Only their corners are
+  rounded, which readers tolerate; changing their size or spacing is what
+  breaks detection.
+
+Tested against ZXing, the same engine family phone cameras use, alongside the
+plain black code as a control. Both behaved identically: readable down to 80 px
+square, through Gaussian blur to sigma 2.5, sensor noise, rotation to 45
+degrees, dim light, washed-out contrast and JPEG quality 25. The only failure,
+blur at sigma 4.0, took the plain code down too.
+
+`scripts/qr_sticker.py` regenerates the PDF. If the URL ever changes, edit
+`URL` at the top and re-run it — and re-print, because every sticker already
+stuck to a card will be pointing at nothing.
 
 ## Publishing
 
