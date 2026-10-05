@@ -143,6 +143,31 @@ All 23 of the department are in `index.html` under `#bagsh`, grouped Профе�
 `person__role` is only there when the role differs from the group heading, so
 the heading is not repeated under every face.
 
+### The element on each cookie
+
+Every teacher has an element written on their cookie, and the page carries the
+same one: the corner of each portrait is a real periodic-table cell, atomic
+number above the symbol, and the letters panel names the element in Mongolian.
+
+The pairing lives on the portrait's button in `index.html` as `data-sym`,
+`data-z` and `data-elname`, and in the chip inside `.person__cell`. To change
+one, edit both on that person's block.
+
+| | | | | | |
+| --- | --- | --- | --- | --- | --- |
+| Нямгэрэл | H 1 | Сарангэрэл | He 2 | Долгормаа | Li 3 |
+| Ирэхбаяр | Be 4 | Энхжаргал | B 5 | Оюунбилэг | C 6 |
+| Рэнцэнмядаг | N 7 | Болормаа | O 8 | Гансувд | Ne 10 |
+| Алтангэрэл | Na 11 | Ербулан | Mg 12 | Сүхбаатар | P 15 |
+| Амгалан | K 19 | Сарантуяа | Ca 20 | Хонгорзул | Ti 22 |
+| Хишигсүрэн | V 23 | Наранмандах | Fe 26 | Энхсаруул | Zn 30 |
+| Буян | Ag 47 | Мөнхжаргал | Te 52 | Саруул | Er 68 |
+| Манлайбаатар | Au 79 | Сайнбилэг | Ac 89 | | |
+
+Read off a handwritten list, so a few symbols were judgement calls: Болормаа's
+was written as O₂ and is shown as its element O, and Энхсаруул's cursive Z
+was read as Zn rather than Zr.
+
 ### The portraits
 
 The photographs came from the department roster sheet. Nineteen were cut out of

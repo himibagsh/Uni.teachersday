@@ -584,6 +584,10 @@ var CONFIG = {
   var nameEl = document.getElementById('letters-name');
   var roleEl = document.getElementById('letters-role');
   var body = document.getElementById('letters-body');
+  var elBox = document.getElementById('letters-el');
+  var elZ = document.getElementById('letters-z');
+  var elSym = document.getElementById('letters-sym');
+  var elName = document.getElementById('letters-elname');
   var opener = null;
 
   /* Захидал үлдээх урилга: маягтын хаяг байвал л харуулна */
@@ -607,7 +611,9 @@ var CONFIG = {
     badge.textContent = String(n);
     badge.setAttribute('aria-hidden', 'true');
     cell.appendChild(badge);
-    b.setAttribute('aria-label', b.getAttribute('data-name') + ' · ' + n + ' захидал');
+    var sym = b.getAttribute('data-sym');
+    b.setAttribute('aria-label', b.getAttribute('data-name')
+      + (sym ? ' · ' + sym : '') + ' · ' + n + ' захидал');
   });
 
   function text(tag, cls, value) {
@@ -625,6 +631,17 @@ var CONFIG = {
     photo.alt = btn.getAttribute('data-name') || '';
     nameEl.textContent = btn.getAttribute('data-name') || '';
     roleEl.textContent = btn.getAttribute('data-role') || '';
+
+    /* бялуун дээрх элемент */
+    var sym = btn.getAttribute('data-sym');
+    if (elBox && sym) {
+      elZ.textContent = btn.getAttribute('data-z') || '';
+      elSym.textContent = sym;
+      elName.textContent = btn.getAttribute('data-elname') || '';
+      elBox.hidden = false;
+    } else if (elBox) {
+      elBox.hidden = true;
+    }
 
     body.textContent = '';
 
