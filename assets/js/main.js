@@ -5,8 +5,10 @@
 
 var CONFIG = {
 
-  /* Бичлэгийн нээлт. Үзэгчийн утасны цагаар тоолно. */
-  premiere: '2026-10-05T12:00:00',
+  /* Нээлтийн болзоот цаг. Тодорхой өдөр амлаагүй бол null байлгана:
+     тоолуур харагдахгүй, зүгээр л «бэлэн болмогц» гэж бичигдэнэ.
+     Огноо тавих бол: '2026-10-12T12:00:00' маягаар. */
+  premiere: null,
 
   /* Эвлүүлэг дуусмагц үүнийг true болгоод videoSrc-г бөглөнө.
      Ингэснээр хүрээ плеерээр солигдож, тоолуур зогсоно. */
@@ -100,25 +102,32 @@ var CONFIG = {
     cell.classList.add('tick');
   }
 
-  function arrived() {
+  /* Огноогүй, эсвэл товлосон цаг өнгөрсөн ч бичлэг бэлэн болоогүй үед.
+     Өнгөрсөн огноо руу тоолуур харуулахгүй. */
+  function waiting() {
     if (countdown) countdown.hidden = true;
-    if (slateLine) slateLine.textContent = 'Бичлэг удахгүй энд тавигдана';
-    if (slateKicker) slateKicker.textContent = 'Бичлэг · эцсийн засвар';
+    if (slateLine) slateLine.textContent = 'Бичлэг бэлэн болмогц энд тавигдана';
+    if (slateKicker) slateKicker.textContent = 'Бичлэг · бэлтгэгдэж байна';
   }
 
   function startCountdown() {
     if (!countdown) return;
 
+    if (!CONFIG.premiere) {       /* огноо амлаагүй */
+      waiting();
+      return;
+    }
+
     var target = new Date(CONFIG.premiere).getTime();
-    if (isNaN(target)) {
-      countdown.hidden = true;
+    if (isNaN(target) || target <= Date.now()) {
+      waiting();
       return;
     }
 
     function tick() {
       var left = target - Date.now();
       if (left <= 0) {
-        arrived();
+        waiting();
         return false;
       }
       var seconds = Math.floor(left / 1000);
