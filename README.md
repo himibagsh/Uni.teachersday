@@ -160,13 +160,13 @@ one, edit both on that person's block.
 | Рэнцэнмядаг | N 7 | Болормаа | O 8 | Гансувд | Ne 10 |
 | Алтангэрэл | Na 11 | Ербулан | Mg 12 | Сүхбаатар | P 15 |
 | Амгалан | K 19 | Сарантуяа | Ca 20 | Хонгорзул | Ti 22 |
-| Хишигсүрэн | V 23 | Наранмандах | Fe 26 | Энхсаруул | Zn 30 |
+| Хишигсүрэн | V 23 | Наранмандах | Fe 26 | Энхсаруул | I 53 |
 | Буян | Ag 47 | Мөнхжаргал | Te 52 | Саруул | Er 68 |
 | Манлайбаатар | Au 79 | Сайнбилэг | Ac 89 | | |
 
-Read off a handwritten list, so a few symbols were judgement calls: Болормаа's
-was written as O₂ and is shown as its element O, and Энхсаруул's cursive Z
-was read as Zn rather than Zr.
+Read off a handwritten list. Two were written as diatomic molecules and are
+shown as the element the cell needs: Болормаа's O₂ as O, and Энхсаруул's I₂
+as I.
 
 ### The portraits
 
