@@ -637,12 +637,6 @@ var CONFIG = {
     if (elBox && sym) {
       elZ.textContent = btn.getAttribute('data-z') || '';
       elSym.textContent = sym;
-      var sub = btn.getAttribute('data-sub');
-      if (sub) {                      /* бялуун дээр молекул хэлбэрээр бичсэн */
-        var s2 = document.createElement('sub');
-        s2.textContent = sub;
-        elSym.appendChild(s2);
-      }
       elName.textContent = btn.getAttribute('data-elname') || '';
       elBox.hidden = false;
     } else if (elBox) {

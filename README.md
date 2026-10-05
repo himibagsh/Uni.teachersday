@@ -157,16 +157,16 @@ one, edit both on that person's block.
 | --- | --- | --- | --- | --- | --- |
 | Нямгэрэл | H 1 | Сарангэрэл | He 2 | Долгормаа | Li 3 |
 | Ирэхбаяр | Be 4 | Энхжаргал | B 5 | Оюунбилэг | C 6 |
-| Рэнцэнмядаг | N 7 | Болормаа | O₂ 8 | Гансувд | Ne 10 |
+| Рэнцэнмядаг | N 7 | Болормаа | O 8 | Гансувд | Ne 10 |
 | Алтангэрэл | Na 11 | Ербулан | Mg 12 | Сүхбаатар | P 15 |
 | Амгалан | K 19 | Сарантуяа | Ca 20 | Хонгорзул | Ti 22 |
-| Хишигсүрэн | V 23 | Наранмандах | Fe 26 | Энхсаруул | I₂ 53 |
+| Хишигсүрэн | V 23 | Наранмандах | Fe 26 | Энхсаруул | I 53 |
 | Буян | Ag 47 | Мөнхжаргал | Te 52 | Саруул | Er 68 |
 | Манлайбаатар | Au 79 | Сайнбилэг | Ac 89 | | |
 
-Two are written on the cookie as the diatomic molecule, and the page keeps
-that notation so the cell matches what the teacher is holding: Болормаа's O₂
-and Энхсаруул's I₂. Their atomic numbers are still the element's, 8 and 53.
+Read off a handwritten list. Two were written as diatomic molecules and are
+shown as the element the cell needs: Болормаа's O₂ as O, and Энхсаруул's I₂
+as I.
 
 ### The portraits
 
