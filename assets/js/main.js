@@ -12,22 +12,22 @@ var CONFIG = {
 
   /* Эвлүүлэг дуусмагц үүнийг true болгоод videoSrc-г бөглөнө.
      Ингэснээр хүрээ плеерээр солигдож, тоолуур зогсоно. */
-  videoReady: false,
+  videoReady: true,
 
   /* Эсвэл assets/video/ дотор хийсэн файл:
        videoSrc: 'assets/video/beltgel.mp4'
      эсвэл YouTube, Vimeo-гийн embed хаяг:
        videoSrc: 'https://www.youtube.com/embed/VIDEO_ID'          */
-  videoSrc: '',
+  videoSrc: 'assets/video/beltgel.mp4',
 
   /* Өөрийн файл тавьсан бол нүүр зураг. */
-  videoPoster: '',
+  videoPoster: 'assets/video/beltgel-poster.jpg',
 
   /* Бэлтгэлийн явц: 'done', 'active', 'pending'. */
   stages: [
-    { label: 'Зураг авалт', state: 'done'    },
-    { label: 'Эвлүүлэг',    state: 'active'  },
-    { label: 'Дуу, өнгө',   state: 'pending' }
+    { label: 'Зураг авалт', state: 'done' },
+    { label: 'Эвлүүлэг',    state: 'done' },
+    { label: 'Дуу, өнгө',   state: 'done' }
   ]
 };
 
@@ -59,7 +59,8 @@ var CONFIG = {
   function buildPlayer(src, poster) {
     if (/\.(mp4|webm|ogv|ogg|mov|m4v)(\?|#|$)/i.test(src)) {
       var video = document.createElement('video');
-      video.className = 'player';
+      /* Бичлэг босоо тул 16:9 хүрээ биш, өөрийнх нь 9:16 хүрээгээр тавина. */
+      video.className = 'player player--portrait';
       video.controls = true;
       video.preload = 'metadata';
       video.playsInline = true;

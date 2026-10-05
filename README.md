@@ -18,7 +18,8 @@ assets/js/main.js        <- the video config lives at the top
 assets/data/letters.js   <- the letters
 assets/favicon.svg
 assets/img/bagsh/        <- the 23 portraits, ink duotone, 4:5
-assets/video/            <- a self-hosted film goes here
+assets/video/beltgel.mp4 <- the film, 10:00, 720x1280, 85 MB
+assets/video/beltgel-poster.jpg
 print/qr-stickers.pdf    <- print this: 40 stickers + one large
 print/qr.svg             <- plain black code, for anything else
 print/qr.png
@@ -82,11 +83,63 @@ Repository → **Settings → Pages** → *Source*: **Deploy from a branch**, br
 `claude/great-newton-6uqpee`, folder `/ (root)`. The site is live at the URL
 above within a minute or two.
 
-## Dropping the film in
+## The film
 
-The page shows a slate with a live countdown until the film exists. When the
-edit is finished, change the `CONFIG` block at the top of `assets/js/main.js`.
-Nothing in `index.html` needs touching.
+It is in, and `CONFIG` at the top of `assets/js/main.js` already points at it:
+
+```js
+videoReady: true,
+videoSrc: 'assets/video/beltgel.mp4',
+videoPoster: 'assets/video/beltgel-poster.jpg',
+```
+
+The camera original is 1080x1920, 10:00, 15.8 Mbps — **1.21 GB**, which GitHub
+refuses outright. What ships is the same film re-encoded for the web:
+
+| | original | on the site |
+| --- | --- | --- |
+| size | 1 210 MB | 85 MB |
+| frame | 1080 x 1920 | 720 x 1280 |
+| video | H.264, 15 805 kbps | H.264 High, 1 100 kbps |
+| audio | AAC 317 kbps | AAC 96 kbps |
+
+It is written with `shouldOptimizeForNetworkUse`, so the moov atom sits at the
+front and the film starts playing before it has finished downloading, and the
+player is set to `preload="metadata"` so merely opening the page does not pull
+85 MB down anybody's mobile data — the poster is all they get until they press
+play.
+
+Keep the camera original somewhere else; it is not in this repository and
+should not be, both for the 100 MB file limit and because every version of an
+85 MB file stays in the git history forever.
+
+### Re-encoding it
+
+There is no ffmpeg on the machine this was built on. `scripts/transcode.swift`
+does the job with AVFoundation alone, straight from the system Swift:
+
+```sh
+swiftc -O -o /tmp/transcode scripts/transcode.swift
+/tmp/transcode "Bagsh nariin bayar 2026.mp4" assets/video/beltgel.mp4 1280 1100 96
+#                <source>                     <output>                 ^     ^   ^
+#                                            long side px -------------+     |   |
+#                                            video kbps ---------------------+   |
+#                                            audio kbps -------------------------+
+```
+
+The long side is the **1280**, not the 720: the film is portrait, so 1280 is
+its height. Budget the bitrate against the 100 MB wall — at 600 s,
+`(video + audio) kbps x 600 / 8000` is the size in MB, so 1 196 kbps lands at
+about 90 MB with room to spare.
+
+`avconvert`, the other tool already on a Mac, is no use here: its presets have
+no bitrate control, and for this film they give either 569 MB at 720x1280
+(`Preset1280x720`) or 320x568 at 63 MB (`PresetMediumQuality`) — nothing in
+between.
+
+### Putting a different film in
+
+Change the same `CONFIG` block. Nothing in `index.html` needs touching.
 
 A file you host yourself (H.264 `.mp4`):
 
@@ -106,10 +159,15 @@ videoSrc: 'https://www.youtube.com/embed/VIDEO_ID',
 The script picks a `<video>` element for a file and an `<iframe>` for an embed
 address, and stops the countdown either way.
 
-GitHub has a 100 MB limit per file, so anything longer than a couple of minutes
-at good quality belongs on YouTube rather than in `assets/video/`.
+GitHub has a hard 100 MB limit per file. If a future cut will not fit at a
+bitrate you are happy with, put it on YouTube unlisted and use the embed
+address instead — the page handles both.
 
-While you wait, you can move the production markers under the slate:
+A self-hosted film gets `.player--portrait` in `assets/css/style.css`, which
+holds it in a 9:16 box at `min(100%, 430px, 45svh)` wide so a tall film fits on
+a phone screen whole. The plain `.player` box an embed uses stays 16:9.
+
+The production markers under the slate are all `done` now, but they still work:
 
 ```js
 stages: [

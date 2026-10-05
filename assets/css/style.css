@@ -508,6 +508,19 @@ a { color: inherit; }
   border: 1px solid var(--rule);
 }
 
+/* Өөрсдийн бичлэг утсаар, босоо авагдсан.
+   Өргөнийг 45svh-ээр хязгаарлахад өндөр нь 80svh-ээс хэтрэхгүй
+   (9:16 харьцаа), ингэснээр дэлгэцэнд бүтнээрээ багтана. */
+.player--portrait {
+  aspect-ratio: 9 / 16;
+  width: min(100%, 430px, 45svh);
+  margin-inline: auto;
+}
+
+@supports not (height: 1svh) {
+  .player--portrait { width: min(100%, 430px, 45vh); }
+}
+
 .filmnotes {
   margin-top: clamp(20px, 3vw, 30px);
   border-top: 1px solid var(--rule);
