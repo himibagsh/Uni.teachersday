@@ -170,6 +170,21 @@ Read off a handwritten list. Two were written as diatomic molecules and are
 shown as the element the cell needs: Болормаа's O₂ as O, and Энхсаруул's I₂
 as I.
 
+### Te · Ac · H · Er
+
+Four of the elements belong to the class's own teachers, and in order they
+spell the word:
+
+| | | | |
+| --- | --- | --- | --- |
+| Мөнхжаргал | Сайнбилэг | Нямгэрэл | Саруул |
+| Te 52 | Ac 89 | H 1 | Er 68 |
+
+`TE` + `AC` + `H` + `ER`. The block closing the roster section shows the four
+cells in a row with the word under them, split by colour so the seams are
+visible. It is hand-written into `index.html` as `.spell`; if an element
+changes, that block needs changing with it.
+
 ### The portraits
 
 The photographs came from the department roster sheet. Nineteen were cut out of
