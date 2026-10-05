@@ -587,6 +587,7 @@ var CONFIG = {
   var elBox = document.getElementById('letters-el');
   var elZ = document.getElementById('letters-z');
   var elSym = document.getElementById('letters-sym');
+  var elAr = document.getElementById('letters-ar');
   var elName = document.getElementById('letters-elname');
   var opener = null;
 
@@ -637,6 +638,7 @@ var CONFIG = {
     if (elBox && sym) {
       elZ.textContent = btn.getAttribute('data-z') || '';
       elSym.textContent = sym;
+      if (elAr) elAr.textContent = btn.getAttribute('data-ar') || '';
       elName.textContent = btn.getAttribute('data-elname') || '';
       elBox.hidden = false;
     } else if (elBox) {

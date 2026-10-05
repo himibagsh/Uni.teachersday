@@ -146,12 +146,14 @@ the heading is not repeated under every face.
 ### The element on each cookie
 
 Every teacher has an element written on their cookie, and the page carries the
-same one: the corner of each portrait is a real periodic-table cell, atomic
-number above the symbol, and the letters panel names the element in Mongolian.
+same one: the corner of each portrait is a full periodic-table cell — atomic
+number, symbol, relative atomic mass — and the letters panel repeats it with
+the element's Mongolian name.
 
 The pairing lives on the portrait's button in `index.html` as `data-sym`,
-`data-z` and `data-elname`, and in the chip inside `.person__cell`. To change
-one, edit both on that person's block.
+`data-z`, `data-ar` and `data-elname`, and in the chip inside `.person__cell`.
+To change one, edit both on that person's block. Masses are the IUPAC abridged
+values; Ac has no stable isotope, so it carries 227.
 
 | | | | | | |
 | --- | --- | --- | --- | --- | --- |

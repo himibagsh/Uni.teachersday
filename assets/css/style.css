@@ -571,11 +571,17 @@ a { color: inherit; }
 }
 
 .roster__hint-el span:first-child { font-size: 0.56rem; color: var(--ink-soft); }
-.roster__hint-el span:last-child {
+.roster__hint-el span:nth-child(2) {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--copper);
+}
+
+.roster__hint-el span:last-child {
+  font-size: 0.5rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .roster__hint-mark {
@@ -674,6 +680,7 @@ a { color: inherit; }
 
 .person__el,
 .person__z,
+.person__ar,
 .person__sym { transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease; }
 
 .person__photo {
@@ -711,6 +718,14 @@ a { color: inherit; }
   font-size: clamp(0.92rem, 0.8rem + 0.5vw, 1.18rem);
   font-weight: 600;
   color: var(--copper);
+}
+
+/* харьцангуй атомын масс — үелэх хүснэгтийн нүдний адил доод мөрөнд */
+.person__ar {
+  font-size: 0.5rem;
+  letter-spacing: -0.01em;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .person__name {
@@ -855,11 +870,17 @@ a { color: inherit; }
 }
 
 .letters__el-cell span:first-child { font-size: 0.6rem; color: var(--ink-soft); }
-.letters__el-cell span:last-child {
+.letters__el-cell span:nth-child(2) {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.12rem;
   color: var(--copper);
+}
+
+.letters__el-cell span:last-child {
+  font-size: 0.56rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .letters__el-name {
