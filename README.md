@@ -137,6 +137,46 @@ no bitrate control, and for this film they give either 569 MB at 720x1280
 (`Preset1280x720`) or 320x568 at 63 MB (`PresetMediumQuality`) — nothing in
 between.
 
+### Why the page goes quiet while the film plays
+
+On a phone the page used to reload itself mid-film and start the video over.
+Nothing in the page was reloading it: iOS Safari was discarding the tab under
+memory pressure and rebuilding it when you came back.
+
+Two decorative `requestAnimationFrame` loops were running the whole time you
+watched — the benzene-ring background on `#bg`, and the drift on the hero's
+periodic table, which kept turning at 60 fps even when it was scrolled far off
+screen. `visibilitychange` did not stop them, because iOS does not call a page
+hidden while its video is playing, not even in fullscreen. Sustained canvas
+repaint next to a hardware video decode is what tripped WebKit's watchdog.
+
+So the `<video>` now announces itself with two events on `document`:
+
+| event | when |
+| --- | --- |
+| `film:play` | the film starts or resumes |
+| `film:idle` | it is paused or has ended |
+
+Both animation modules listen and park themselves, and each composes that with
+`document.hidden` and — for the hero — whether it is still on screen, so the
+loops only run when all three say yes. Measured in the browser: 120 callbacks a
+second before play, **0** during, 120 again after pause.
+
+The background canvas also drops to 1.5x pixel density below 700 px wide
+instead of 2x. A full-viewport decorative canvas is the most expensive thing on
+the page, and the difference is not visible.
+
+And in case a phone evicts the tab anyway — a cheap old handset with the film
+buffered will — the player writes `currentTime` to `sessionStorage` every two
+seconds under `beltgel:t` and seeks back there on load. A reload picks up where
+the teacher was instead of starting from the beginning. It ignores a mark in the
+first 5 seconds or the last 15, and clears it when the film ends.
+
+If it still happens on a particular phone, the thing to change is the 85 MB of
+buffered video, not the page: put the film on YouTube unlisted and give
+`videoSrc` the embed address, which hands the memory problem to an iframe that
+adapts its bitrate.
+
 ### Putting a different film in
 
 Change the same `CONFIG` block. Nothing in `index.html` needs touching.

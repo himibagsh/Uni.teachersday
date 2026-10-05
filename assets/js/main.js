@@ -56,6 +56,59 @@ var CONFIG = {
 
   /* ---- бичлэг бэлэн болоход ---- */
 
+  /* Бичлэг тоглож эхлэхэд хуудасны чимэглэлийн хөдөлгөөнд дохио өгнө.
+     iOS Safari бичлэг үзэж байхад хуудсыг «нуугдсан» гэж тооцдоггүй тул
+     visibilitychange ажиллахгүй — өөрсдөө мэдэгдэхээс өөр аргагүй. */
+  function fire(name) {
+    var e;
+    try {
+      e = new CustomEvent(name);
+    } catch (err) {
+      e = document.createEvent('Event');
+      e.initEvent(name, false, false);
+    }
+    document.dispatchEvent(e);
+  }
+
+  /* Хаана хүртэл үзснийг санана. Утсанд санах ой дутахад iOS таб руугаа
+     буцахад хуудсыг дахин ачаалдаг; тэр үед бичлэг эхнээсээ эхлэхгүй. */
+  var MARK = 'beltgel:t';
+
+  function remember(t) {
+    try { window.sessionStorage.setItem(MARK, String(t)); } catch (e) {}
+  }
+
+  function forget() {
+    try { window.sessionStorage.removeItem(MARK); } catch (e) {}
+  }
+
+  function recall() {
+    try { return parseFloat(window.sessionStorage.getItem(MARK)) || 0; }
+    catch (e) { return 0; }
+  }
+
+  function wireFilm(video) {
+    video.addEventListener('playing', function () { fire('film:play'); });
+    video.addEventListener('pause',   function () { fire('film:idle'); });
+    video.addEventListener('ended',   function () { fire('film:idle'); forget(); });
+
+    var last = -9;
+    video.addEventListener('timeupdate', function () {
+      var t = video.currentTime;
+      if (Math.abs(t - last) < 2) return;      /* 2 секунд тутамд л бичнэ */
+      last = t;
+      remember(t);
+    });
+
+    /* Эхэнд нь ч, төгсгөлд нь ч ойрхон бол зүгээр эхнээс нь эхэлнэ. */
+    video.addEventListener('loadedmetadata', function () {
+      var t = recall();
+      if (t > 5 && video.duration && t < video.duration - 15) {
+        try { video.currentTime = t; } catch (e) {}
+      }
+    });
+  }
+
   function buildPlayer(src, poster) {
     if (/\.(mp4|webm|ogv|ogg|mov|m4v)(\?|#|$)/i.test(src)) {
       var video = document.createElement('video');
@@ -67,6 +120,7 @@ var CONFIG = {
       video.setAttribute('playsinline', '');
       if (poster) video.poster = poster;
       video.src = src;
+      wireFilm(video);
       return video;
     }
     var frame = document.createElement('iframe');
@@ -300,7 +354,9 @@ var CONFIG = {
   }
 
   function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    /* Бүтэн дэлгэцийн дэвсгэрийг утсан дээр 2x-ээр зурах нь үнэтэй.
+       Нарийн дэлгэцэнд 1.5 хангалттай — ялгаа нь нүдэнд мэдэгдэхгүй. */
+    dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.5 : 2);
     W = window.innerWidth;
     H = window.innerHeight;
     canvas.width = Math.round(W * dpr);
@@ -458,9 +514,21 @@ var CONFIG = {
 
   window.addEventListener('pointerleave', function () { pointer.live = false; }, { passive: true });
 
+  /* Хуудас нуугдсан, эсвэл бичлэг тоглож байвал зогсоно. Бичлэг үзэж
+     байхад ар талд 60 кадр/сек зурсаар байх нь утсыг хэт ачаалдаг. */
+  var off = { hidden: false, film: false };
+
+  function sync() {
+    if (off.hidden || off.film) stop(); else start();
+  }
+
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) stop(); else start();
+    off.hidden = document.hidden;
+    sync();
   });
+
+  document.addEventListener('film:play', function () { off.film = true;  sync(); });
+  document.addEventListener('film:idle', function () { off.film = false; sync(); });
 
   /* өнгөний горим солигдвол будгаа шинэчилнэ */
   if (window.matchMedia) {
@@ -509,13 +577,40 @@ var CONFIG = {
 
   hero.addEventListener('pointerleave', function () { idle = true; }, { passive: true });
 
+  /* Хүснэгт дэлгэцээс гармагц, эсвэл бичлэг тоглоход зогсоно. Өмнө нь
+     бичлэг рүү гүйлгэсний дараа ч хоосон зай дээр эргэлдсээр байсан. */
+  var off = { gone: false, film: false, hidden: false };
+
+  function halt() {
+    if (!raf) return;
+    cancelAnimationFrame(raf);
+    raf = null;
+  }
+
+  function go() {
+    if (calm || raf || off.gone || off.film || off.hidden) return;
+    raf = requestAnimationFrame(drift);
+  }
+
+  function sync() {
+    if (off.gone || off.film || off.hidden) halt(); else go();
+  }
+
+  document.addEventListener('visibilitychange', function () { off.hidden = document.hidden; sync(); });
+  document.addEventListener('film:play', function () { off.film = true;  sync(); });
+  document.addEventListener('film:idle', function () { off.film = false; sync(); });
+
   put(tx, ty);
-  if (!calm) raf = requestAnimationFrame(drift);
+  go();
 
   /* гүйлгэхэд хүснэгт намуухан хоцорч хөдөлнө */
   if (!calm && 'IntersectionObserver' in window) {
     var visible = true;
-    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(hero);
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      off.gone = !visible;
+      sync();
+    }).observe(hero);
     window.addEventListener('scroll', function () {
       if (!visible) return;
       var y = window.scrollY || window.pageYOffset;
