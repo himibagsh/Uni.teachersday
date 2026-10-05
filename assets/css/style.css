@@ -540,6 +540,48 @@ a { color: inherit; }
 
 /* ---------- багш нар ---------- */
 
+/* Багш өөрийн зураг дээрээ дарж захидлаа уншихыг хэлнэ */
+.roster__hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(16px, 2.6vw, 24px);
+  padding: 13px 16px;
+  background: var(--panel);
+  border-left: 3px solid var(--copper);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+/* хуруугаар дарахыг илэрхийлсэн цагираг */
+.roster__hint-mark {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--copper);
+  position: relative;
+}
+
+.roster__hint-mark::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid var(--copper);
+  opacity: 0.45;
+  animation: tapring 2.4s ease-out infinite;
+}
+
+@keyframes tapring {
+  0%        { transform: scale(0.55); opacity: 0.6; }
+  70%, 100% { transform: scale(1);    opacity: 0; }
+}
+
 .roster__group { margin-top: clamp(26px, 4vw, 40px); }
 
 .roster__label {
@@ -1086,6 +1128,7 @@ html { scroll-behavior: smooth; }
   .hero__to span { animation: none; }
   .marquee__track { animation: none; }
   .countdown dd.tick { animation: none; }
+  .roster__hint-mark::after { animation: none; opacity: 0.45; }
   .person__btn:hover .person__cell { transform: none; }
   .person__btn:hover .person__photo { transform: none; }
 }
