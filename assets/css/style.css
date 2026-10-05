@@ -1304,6 +1304,15 @@ a { color: inherit; }
 
 html { scroll-behavior: smooth; }
 
+/* Утсан дээр хуудсыг дээрээс нь доош чангаахад хөтөч хуудсыг дахин
+   ачаалдаг (pull-to-refresh). Босоо бичлэг үзэж байхад хуруугаа доош
+   гулсуулахад л бичлэг эхнээсээ эхэлдэг байсан шалтгаан нь энэ.
+   Хуудас дотор гүйлгэх нь хэвээрээ, зөвхөн дахин ачаалах дохиог хаана. */
+html,
+body {
+  overscroll-behavior-y: contain;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rise, .draw { animation: none; }

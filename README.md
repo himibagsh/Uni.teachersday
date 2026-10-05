@@ -137,7 +137,30 @@ no bitrate control, and for this film they give either 569 MB at 720x1280
 (`Preset1280x720`) or 320x568 at 63 MB (`PresetMediumQuality`) — nothing in
 between.
 
-### Why the page goes quiet while the film plays
+### Pull-to-refresh — the actual reason the film restarted
+
+On a phone the page reloaded itself mid-film and the video started over. The
+cause was the browser's own **pull-to-refresh** gesture: nothing had set
+`overscroll-behavior`, so a downward swipe while the page was near the top
+reloaded it. The film is portrait and tall, so swiping up and down over it to
+get comfortable is exactly what a teacher does — and one swipe too far at the
+top reloaded the page.
+
+`assets/css/style.css` now sets `overscroll-behavior-y: contain` on `html` and
+`body`. Scrolling inside the page is untouched; only the reload gesture goes.
+
+Two supporting changes:
+
+- **`?v=` on the stylesheet and scripts in `index.html`.** Pages serves assets
+  with `cache-control: max-age=600` and phones hold them longer than that in
+  practice, so a fix could sit on the server while the phone kept running the
+  old file. Bump the number when you change `main.js` or `style.css`.
+- The resume mark moved from `sessionStorage` to `localStorage` with a
+  timestamp, because a tab that is closed and reopened — not merely reloaded —
+  loses `sessionStorage`. A mark older than 12 hours is ignored so a teacher
+  coming back next week starts at the beginning.
+
+### Why the page also goes quiet while the film plays
 
 On a phone the page used to reload itself mid-film and start the video over.
 Nothing in the page was reloading it: iOS Safari was discarding the tab under

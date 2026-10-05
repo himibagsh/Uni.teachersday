@@ -73,18 +73,39 @@ var CONFIG = {
   /* Хаана хүртэл үзснийг санана. Утсанд санах ой дутахад iOS таб руугаа
      буцахад хуудсыг дахин ачаалдаг; тэр үед бичлэг эхнээсээ эхлэхгүй. */
   var MARK = 'beltgel:t';
+  var MARK_AT = 'beltgel:at';
+  var KEEP = 12 * 3600 * 1000;      /* 12 цагийн дотор л үргэлжлүүлнэ */
+
+  /* sessionStorage биш localStorage: таб бүрмөсөн хаагдаад дахин нээгдвэл
+     sessionStorage цэвэрлэгддэг. Хэтэрхий хуучин тэмдэглэлээр дунд
+     газраас нь эхлүүлэхгүйн тулд хугацааг нь хамт бичнэ. */
+  function store() {
+    try { return window.localStorage; } catch (e) { return null; }
+  }
 
   function remember(t) {
-    try { window.sessionStorage.setItem(MARK, String(t)); } catch (e) {}
+    var s = store();
+    if (!s) return;
+    try {
+      s.setItem(MARK, String(t));
+      s.setItem(MARK_AT, String(Date.now()));
+    } catch (e) {}
   }
 
   function forget() {
-    try { window.sessionStorage.removeItem(MARK); } catch (e) {}
+    var s = store();
+    if (!s) return;
+    try { s.removeItem(MARK); s.removeItem(MARK_AT); } catch (e) {}
   }
 
   function recall() {
-    try { return parseFloat(window.sessionStorage.getItem(MARK)) || 0; }
-    catch (e) { return 0; }
+    var s = store();
+    if (!s) return 0;
+    try {
+      var at = parseFloat(s.getItem(MARK_AT)) || 0;
+      if (!at || Date.now() - at > KEEP) return 0;
+      return parseFloat(s.getItem(MARK)) || 0;
+    } catch (e) { return 0; }
   }
 
   function wireFilm(video) {
@@ -103,7 +124,7 @@ var CONFIG = {
     /* Эхэнд нь ч, төгсгөлд нь ч ойрхон бол зүгээр эхнээс нь эхэлнэ. */
     video.addEventListener('loadedmetadata', function () {
       var t = recall();
-      if (t > 5 && video.duration && t < video.duration - 15) {
+      if (t > 3 && video.duration && t < video.duration - 15) {
         try { video.currentTime = t; } catch (e) {}
       }
     });
